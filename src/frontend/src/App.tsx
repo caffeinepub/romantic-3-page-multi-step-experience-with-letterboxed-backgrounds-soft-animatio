@@ -2,18 +2,11 @@ import { RouterProvider, createRouter, createRootRoute, createRoute } from '@tan
 import IntroPage from './pages/IntroPage';
 import ProposalPage from './pages/ProposalPage';
 import FinalPage from './pages/FinalPage';
-import BackgroundAudioProvider from './components/BackgroundAudioProvider';
+import RootLayout from './components/RootLayout';
+import AppErrorBoundary from './components/AppErrorBoundary';
 
 const rootRoute = createRootRoute({
-  component: () => (
-    <BackgroundAudioProvider>
-      <div className="min-h-screen">
-        <main>
-          <RouterProvider router={router} />
-        </main>
-      </div>
-    </BackgroundAudioProvider>
-  ),
+  component: RootLayout,
 });
 
 const introRoute = createRoute({
@@ -45,5 +38,9 @@ declare module '@tanstack/react-router' {
 }
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AppErrorBoundary>
+      <RouterProvider router={router} />
+    </AppErrorBoundary>
+  );
 }

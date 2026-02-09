@@ -1,187 +1,270 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --radius: 0.625rem;
-    --background: 1 0 0;
-    --foreground: 0.145 0 0;
-    --card: 1 0 0;
-    --card-foreground: 0.145 0 0;
-    --popover: 1 0 0;
-    --popover-foreground: 0.145 0 0;
-    --primary: 0.205 0 0;
-    --primary-foreground: 0.985 0 0;
-    --secondary: 0.97 0 0;
-    --secondary-foreground: 0.205 0 0;
-    --muted: 0.97 0 0;
-    --muted-foreground: 0.556 0 0;
-    --accent: 0.97 0 0;
-    --accent-foreground: 0.205 0 0;
-    --destructive: 0.577 0.245 27.325;
-    --destructive-foreground: 0.985 0 0;
-    --border: 0.922 0 0;
-    --input: 0.922 0 0;
-    --ring: 0.708 0 0;
-    --chart-1: 0.646 0.222 41.116;
-    --chart-2: 0.6 0.118 184.704;
-    --chart-3: 0.398 0.07 227.392;
-    --chart-4: 0.828 0.189 84.429;
-    --chart-5: 0.769 0.188 70.08;
-    --sidebar: 0.985 0 0;
-    --sidebar-foreground: 0.145 0 0;
-    --sidebar-primary: 0.205 0 0;
-    --sidebar-primary-foreground: 0.985 0 0;
-    --sidebar-accent: 0.97 0 0;
-    --sidebar-accent-foreground: 0.205 0 0;
-    --sidebar-border: 0.922 0 0;
-    --sidebar-ring: 0.708 0 0;
-
-    /* Custom romantic color palette */
-    --wine: 0.35 0.15 350;
-    --unicorn-silver: 0.85 0.02 270;
-    --honey-gold: 0.75 0.12 70;
-    --kaitoke: 0.25 0.08 150;
+    --wine: oklch(0.35 0.12 0);
+    --unicorn-silver: oklch(0.85 0.02 270);
+    --honey-gold: oklch(0.75 0.15 85);
+    --kaitoke: oklch(0.25 0.08 150);
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.15 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.15 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.15 0 0);
+    --primary: oklch(0.35 0.12 0);
+    --primary-foreground: oklch(0.98 0 0);
+    --secondary: oklch(0.96 0 0);
+    --secondary-foreground: oklch(0.15 0 0);
+    --muted: oklch(0.96 0 0);
+    --muted-foreground: oklch(0.45 0 0);
+    --accent: oklch(0.96 0 0);
+    --accent-foreground: oklch(0.15 0 0);
+    --destructive: oklch(0.55 0.22 25);
+    --destructive-foreground: oklch(0.98 0 0);
+    --border: oklch(0.90 0 0);
+    --input: oklch(0.90 0 0);
+    --ring: oklch(0.35 0.12 0);
+    --radius: 0.5rem;
   }
 
   .dark {
-    --background: 0.145 0 0;
-    --foreground: 0.985 0 0;
-    --card: 0.205 0 0;
-    --card-foreground: 0.985 0 0;
-    --popover: 0.269 0 0;
-    --popover-foreground: 0.985 0 0;
-    --primary: 0.922 0 0;
-    --primary-foreground: 0.205 0 0;
-    --secondary: 0.269 0 0;
-    --secondary-foreground: 0.985 0 0;
-    --muted: 0.269 0 0;
-    --muted-foreground: 0.708 0 0;
-    --accent: 0.371 0 0;
-    --accent-foreground: 0.985 0 0;
-    --destructive: 0.704 0.191 22.216;
-    --destructive-foreground: 0.205 0 0;
-    --border: 1 0 0 / 10%;
-    --input: 1 0 0 / 15%;
-    --ring: 0.556 0 0;
-    --chart-1: 0.488 0.243 264.376;
-    --chart-2: 0.696 0.17 162.48;
-    --chart-3: 0.769 0.188 70.08;
-    --chart-4: 0.627 0.265 303.9;
-    --chart-5: 0.645 0.246 16.439;
-    --sidebar: 0.205 0 0;
-    --sidebar-foreground: 0.985 0 0;
-    --sidebar-primary: 0.488 0.243 264.376;
-    --sidebar-primary-foreground: 0.985 0 0;
-    --sidebar-accent: 0.269 0 0;
-    --sidebar-accent-foreground: 0.985 0 0;
-    --sidebar-border: 1 0 0 / 10%;
-    --sidebar-ring: 0.439 0 0;
-  }
-
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-    font-family: 'Crimson Text', serif;
-  }
-
-  /* Custom font families */
-  .font-david {
-    font-family: 'Libre Baskerville', serif;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-  }
-
-  .font-emily {
-    font-family: 'Crimson Text', serif;
-    font-weight: 400;
-    letter-spacing: 0.01em;
-  }
-
-  .font-high-tower {
-    font-family: 'High Tower Text', 'Libre Baskerville', serif;
-    font-weight: 600;
-  }
-
-  .font-times {
-    font-family: 'Times New Roman', Times, serif;
-  }
-
-  /* Custom colors */
-  .text-wine {
-    color: oklch(var(--wine));
-  }
-
-  .text-unicorn-silver {
-    color: oklch(var(--unicorn-silver));
-  }
-
-  .text-honey-gold {
-    color: oklch(var(--honey-gold));
-  }
-
-  .text-kaitoke {
-    color: oklch(var(--kaitoke));
-  }
-
-  .bg-wine {
-    background-color: oklch(var(--wine));
+    --background: oklch(0.15 0 0);
+    --foreground: oklch(0.98 0 0);
+    --card: oklch(0.15 0 0);
+    --card-foreground: oklch(0.98 0 0);
+    --popover: oklch(0.15 0 0);
+    --popover-foreground: oklch(0.98 0 0);
+    --primary: oklch(0.35 0.12 0);
+    --primary-foreground: oklch(0.98 0 0);
+    --secondary: oklch(0.22 0 0);
+    --secondary-foreground: oklch(0.98 0 0);
+    --muted: oklch(0.22 0 0);
+    --muted-foreground: oklch(0.65 0 0);
+    --accent: oklch(0.22 0 0);
+    --accent-foreground: oklch(0.98 0 0);
+    --destructive: oklch(0.45 0.22 25);
+    --destructive-foreground: oklch(0.98 0 0);
+    --border: oklch(0.22 0 0);
+    --input: oklch(0.22 0 0);
+    --ring: oklch(0.35 0.12 0);
   }
 }
 
-@layer utilities {
-  /* Fade-in animation */
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+@layer base {
+  * {
+    @apply border-border;
   }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
 
-  .animate-fade-in {
-    animation: fade-in 1.5s ease-out forwards;
+/* Custom font families */
+@layer base {
+  .font-david {
+    font-family: 'David', serif;
   }
+  .font-emily {
+    font-family: 'Emily', cursive;
+  }
+  .font-high-tower {
+    font-family: 'High Tower Text', serif;
+  }
+  .font-times {
+    font-family: 'Times New Roman', serif;
+  }
+}
 
-  /* Delayed fade-in for CTA */
-  @keyframes delayed-fade-in {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
+/* Custom animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-  .animate-delayed-fade-in {
-    animation: delayed-fade-in 1s ease-out forwards;
+@keyframes delayed-fade-in {
+  0%,
+  50% {
+    opacity: 0;
+    transform: translateY(20px);
   }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-  /* Shine and blink animation */
-  @keyframes shine-blink {
-    0%,
-    100% {
-      opacity: 1;
-      text-shadow: 0 0 10px oklch(var(--honey-gold) / 0.5);
-    }
-    50% {
-      opacity: 0.7;
-      text-shadow: 0 0 20px oklch(var(--honey-gold) / 0.8), 0 0 30px oklch(var(--honey-gold) / 0.6);
-    }
+@keyframes shine-blink {
+  0%,
+  100% {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
   }
+  50% {
+    text-shadow:
+      0 0 20px rgba(255, 255, 255, 0.8),
+      0 0 30px rgba(255, 255, 255, 0.6);
+  }
+}
 
-  .animate-shine-blink {
-    animation: shine-blink 2s ease-in-out infinite;
+@keyframes shimmer {
+  0% {
+    text-shadow:
+      0 0 5px rgba(255, 255, 255, 0.4),
+      0 0 10px rgba(255, 255, 255, 0.3);
   }
+  50% {
+    text-shadow:
+      0 0 10px rgba(255, 255, 255, 0.6),
+      0 0 20px rgba(255, 255, 255, 0.5),
+      0 0 30px rgba(255, 255, 255, 0.4);
+  }
+  100% {
+    text-shadow:
+      0 0 5px rgba(255, 255, 255, 0.4),
+      0 0 10px rgba(255, 255, 255, 0.3);
+  }
+}
+
+@keyframes float-heart-1 {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px) rotate(5deg);
+  }
+  50% {
+    transform: translateY(-10px) translateX(-10px) rotate(-5deg);
+  }
+  75% {
+    transform: translateY(-30px) translateX(5px) rotate(3deg);
+  }
+}
+
+@keyframes float-heart-2 {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-25px) translateX(-15px) rotate(-8deg);
+  }
+  66% {
+    transform: translateY(-15px) translateX(15px) rotate(8deg);
+  }
+}
+
+@keyframes float-heart-3 {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  20% {
+    transform: translateY(-15px) translateX(8px) rotate(4deg);
+  }
+  40% {
+    transform: translateY(-30px) translateX(-8px) rotate(-4deg);
+  }
+  60% {
+    transform: translateY(-20px) translateX(12px) rotate(6deg);
+  }
+  80% {
+    transform: translateY(-10px) translateX(-5px) rotate(-3deg);
+  }
+}
+
+@keyframes float-heart-4 {
+  0%, 100% {
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-35px) scale(1.1) rotate(10deg);
+  }
+}
+
+@keyframes float-heart-5 {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  30% {
+    transform: translateY(-20px) translateX(-12px) rotate(-6deg);
+  }
+  70% {
+    transform: translateY(-25px) translateX(12px) rotate(6deg);
+  }
+}
+
+@keyframes float-heart-6 {
+  0%, 100% {
+    transform: translateY(0) translateX(0) scale(1);
+  }
+  25% {
+    transform: translateY(-18px) translateX(10px) scale(1.05);
+  }
+  50% {
+    transform: translateY(-28px) translateX(-8px) scale(0.95);
+  }
+  75% {
+    transform: translateY(-15px) translateX(6px) scale(1.02);
+  }
+}
+
+@keyframes pulse-heart {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-out forwards;
+}
+
+.animate-delayed-fade-in {
+  animation: delayed-fade-in 2s ease-out forwards;
+}
+
+.animate-shine-blink {
+  animation: shine-blink 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+.animate-float-heart-1 {
+  animation: float-heart-1 6s ease-in-out infinite;
+}
+
+.animate-float-heart-2 {
+  animation: float-heart-2 7s ease-in-out infinite;
+}
+
+.animate-float-heart-3 {
+  animation: float-heart-3 8s ease-in-out infinite;
+}
+
+.animate-float-heart-4 {
+  animation: float-heart-4 5s ease-in-out infinite;
+}
+
+.animate-float-heart-5 {
+  animation: float-heart-5 6.5s ease-in-out infinite;
+}
+
+.animate-float-heart-6 {
+  animation: float-heart-6 7.5s ease-in-out infinite;
+}
+
+.animate-pulse-heart {
+  animation: pulse-heart 2s ease-in-out infinite;
 }

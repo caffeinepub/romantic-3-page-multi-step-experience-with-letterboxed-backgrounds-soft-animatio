@@ -1,13 +1,20 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 5,
-  "summary": "Romantic multi-step website experience with letterboxed full-screen backgrounds, black overlay, consistent typography/colors, soft animations, and hidden autoplay looping music that persists across navigation, now including a Valentine-themed “Enter the Website” intro screen before Page 1.",
+  "projectStateVersion": 11,
+  "summary": "Romantic multi-step website experience with letterboxed full-screen backgrounds, black overlay, consistent typography/colors, soft animations, and a Valentine/love-themed “Enter the Website” intro screen (restyled with love colors + heart animations) before Page 1; Page 2 YES button slightly smaller; Page 3 text and signature set to pure white for readability (shimmer removed). Background music is currently omitted from rebuild due to missing/undetected audio upload and repeated build configuration errors.",
   "architectural_notes": [
     "Background images must use CSS object-fit/background-size: contain (letterbox) to avoid cropping; center; no-repeat; add black translucent overlay layer for readability.",
     "Audio must persist across navigation (e.g., shared layout/single-page app routing or persistent audio element) with autoplay+loop and no visible controls.",
-    "Add a pre-Page-1 intro/landing screen; ensure background audio autoplay is initiated after the user clicks “Enter the Website” to satisfy browser autoplay restrictions while keeping audio persistent across subsequent navigation."
+    "Add a pre-Page-1 intro/landing screen; ensure background audio autoplay is initiated after the user clicks “Enter the Website” to satisfy browser autoplay restrictions while keeping audio persistent across subsequent navigation.",
+    "When music is re-enabled: attempt autoplay on initial visit, but fall back to starting playback on the first user interaction (Enter button) if autoplay is blocked.",
+    "If the audio asset is missing/undetected in the build system, proceed with a no-music build to ensure successful deployment."
   ],
-  "known_issues": [],
+  "known_issues": [
+    "Deployed site/preview not loading (white/grey screen) even in new tab/live link on mobile; user suspects code issue.",
+    "Production deployment failed with generic \"Deployment error\" during Version 2 deploy.",
+    "Build pipeline repeatedly fails with a \"Configuration error\" during rebuild attempts.",
+    "Uploaded audio file is not detected/available in the build system despite user indicating it was uploaded; only images are visible."
+  ],
   "isFixRequest": false,
   "existing_features": [
     {
@@ -97,6 +104,78 @@
         "REQ-11"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-fix-the-tanstack-router-setup-so-the-app-renders-reliably-no-white-blank-screen-on-mobile-and-desktop-by-removing-the-incorrect-nested-routerprovider-usage-and-ensuring-the-root-route-renders-children-via-an-outlet-based-layout",
+      "title": "Fix the TanStack Router setup so the app renders reliably (no white/blank screen) on mobile and desktop by removing the incorrect nested RouterProvider usage and ensuring the root route renders children via an Outlet-based layout.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-valentine-love-themed-enter-the-website-landing-screen-that-appears-before-page-1-and-requires-a-user-click-tap-to-enter-the-existing-3-page-flow-while-keeping-the-rest-of-the-experience-unchanged",
+      "title": "Add a Valentine/love-themed “Enter the Website” landing screen that appears before Page 1 and requires a user click/tap to enter the existing 3-page flow, while keeping the rest of the experience unchanged.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-background-music-still-exists-as-a-hidden-looping-track-and-persists-across-navigation-but-make-its-startup-non-blocking-and-compatible-with-mobile-autoplay-restrictions-by-starting-playback-on-the-first-user-interaction-the-enter-the-website-click-tap-qualifies-and-ensuring-failures-do-not-prevent-the-ui-from-rendering",
+      "title": "Ensure background music still exists as a hidden looping track and persists across navigation, but make its startup non-blocking and compatible with mobile autoplay restrictions by starting playback on the first user interaction (the “Enter the Website” click/tap qualifies) and ensuring failures do not prevent the UI from rendering.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-production-safe-client-side-error-boundary-fallback-ui-so-that-any-unexpected-runtime-error-shows-a-minimal-readable-error-screen-instead-of-a-blank-page-and-logs-the-error-to-the-browser-console-for-debugging",
+      "title": "Add a production-safe client-side error boundary/fallback UI so that any unexpected runtime error shows a minimal readable error screen (instead of a blank page) and logs the error to the browser console for debugging.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-disable-the-background-music-feature-entirely-so-the-app-builds-and-runs-without-requiring-any-audio-file-while-keeping-the-rest-of-the-3-page-experience-unchanged-including-the-enter-the-website-gate-screen-this-includes-removing-the-music-startup-call-from-the-enterwebsitegate-and-removing-the-backgroundaudioprovider-wiring-so-no-audio-is-initialized-played",
+      "title": "Remove/disable the background music feature entirely so the app builds and runs without requiring any audio file, while keeping the rest of the 3-page experience unchanged (including the “Enter the Website” gate screen). This includes removing the music startup call from the EnterWebsiteGate and removing the BackgroundAudioProvider wiring so no audio is initialized/played.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-asset-replacement-documentation-frontend-readme-assets-md-to-reflect-that-background-music-is-intentionally-disabled-removed-for-this-rebuild-and-that-only-the-three-background-images-need-to-be-replaced-to-customize-the-site",
+      "title": "Update the asset replacement documentation (frontend/README-assets.md) to reflect that background music is intentionally disabled/removed for this rebuild and that only the three background images need to be replaced to customize the site.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-page-3-final-page-so-the-long-message-text-and-the-signature-are-pure-white-and-easy-to-read-remove-the-shimmer-shine-animation-from-the-message-keep-the-existing-fonts-and-ensure-the-signature-uses-the-same-font-as-before-but-is-also-pure-white",
+      "title": "Update Page 3 (Final page) so the long message text and the signature are pure white and easy to read: remove the shimmer/shine animation from the message, keep the existing fonts, and ensure the signature uses the same font as before but is also pure white.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-the-page-2-yes-button-slightly-smaller-while-keeping-the-existing-romantic-styling-same-colors-rounded-shape-hover-behavior-and-general-look",
+      "title": "Make the Page 2 “YES” button slightly smaller while keeping the existing romantic styling (same colors, rounded shape, hover behavior, and general look).",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-restyle-the-pre-page-1-enter-the-website-gate-screen-to-feel-more-love-valentine-themed-using-love-colors-and-animated-hearts-while-keeping-the-same-gate-behavior-user-must-click-tap-to-enter-the-site",
+      "title": "Restyle the pre-Page-1 “Enter the Website” gate screen to feel more love/Valentine-themed using love colors and animated hearts, while keeping the same gate behavior (user must click/tap to enter the site).",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -133,6 +212,30 @@
     {
       "id": "AR-6",
       "summary": "Add a Valentine/love-themed “Enter the Website” intro screen before Page 1 that the user clicks to enter the main 3-page flow",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Restyle intro/landing screen with love-themed colors and heart animations (not just white text on black background) while keeping the Enter the Website gate behavior",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Page 3 readability update: remove metallic shimmer entirely and set all Page 3 text + signature to pure white while keeping the same fonts",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Page 2 UI tweak: make the YES button a little smaller (keep existing styling otherwise)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Update background image asset mapping to use these uploaded images: Page 1 = InsMix_20260209_211147926; Page 2 = InsMix_20260209_231320300; Page 3 = InsMix_20260209_231554807 (copy/rename into expected static filenames used by the app)",
       "reqIds": [],
       "status": "pending"
     }

@@ -18,8 +18,10 @@ export default function ProposalPage() {
           Will you marry me ?
         </h1>
 
-        {/* YES button - below question */}
-        <RomanticButton onClick={handleYesClick}>YES</RomanticButton>
+        {/* Pink box containing YES button */}
+        <div className="animate-fade-in rounded-2xl bg-pink-400/30 p-8 backdrop-blur-sm">
+          <RomanticButton onClick={handleYesClick} size="small">YES</RomanticButton>
+        </div>
       </div>
     </FullscreenBackground>
   );

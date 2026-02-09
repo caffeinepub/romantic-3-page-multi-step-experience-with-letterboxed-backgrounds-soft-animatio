@@ -1,59 +1,62 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Apply user-provided backgrounds for Pages 1–3 and install persistent looping background music",
+  "title": "Love-themed gate restyle, Final page readability fixes, and smaller YES button",
   "requirements": [
     {
-      "id": "REQ-10",
-      "summary": "Replace Page 1–3 background images by overwriting the expected static asset filenames in frontend/public/assets/generated/ without changing existing contain/letterbox + overlay rendering behavior.",
+      "id": "REQ-19",
+      "summary": "Make the Final page message and signature solid pure white, remove shimmer animation, and preserve existing fonts and scroll/line-break behavior.",
       "acceptanceCriteria": [
-        "When visiting route / (Page 1), the background image displayed is the one from InsMix_20260209_211147926.jpg, shown in contain/letterbox mode (not cropped) with the existing black overlay.",
-        "When navigating to /proposal (Page 2), the background image displayed is the floral dress collage (InsMix_20260209_231320300.jpg) in contain/letterbox mode with the existing black overlay.",
-        "When navigating to /final (Page 3), the background image displayed is InsMix_20260209_231554807.jpg in contain/letterbox mode with the existing black overlay.",
-        "No code changes are required to swap these three backgrounds in the future beyond replacing the three files at frontend/public/assets/generated/ with the exact same filenames."
+        "On /final, the long message is rendered in solid white (no shimmer/metallic/shine animation).",
+        "On /final, the signature “- YOUR ARSU” is rendered in solid white and retains its existing font family styling.",
+        "Page 3 remains vertically scrollable and preserves existing line breaks (whitespace-pre-wrap behavior remains intact)."
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/generated/bg-page-1.dim_1920x1080.png",
+          "path": "frontend/src/pages/FinalPage.tsx",
           "operation": "modify",
-          "description": "Overwrite this file’s contents with the user-uploaded image InsMix_20260209_211147926.jpg (copied/converted as needed) while keeping the exact target filename so existing background rendering continues unchanged."
-        },
-        {
-          "path": "frontend/public/assets/generated/bg-page-2.dim_1920x1080.png",
-          "operation": "modify",
-          "description": "Overwrite this file’s contents with the user-uploaded image InsMix_20260209_231320300.jpg (copied/converted as needed) while keeping the exact target filename so existing background rendering continues unchanged."
-        },
-        {
-          "path": "frontend/public/assets/generated/bg-page-3.dim_1920x1080.png",
-          "operation": "modify",
-          "description": "Overwrite this file’s contents with the user-uploaded image InsMix_20260209_231554807.jpg (copied/converted as needed) while keeping the exact target filename so existing background rendering continues unchanged."
-        },
-        {
-          "path": "frontend/README-assets.md",
-          "operation": "modify",
-          "description": "Update the asset replacement guide to explicitly document the provided mapping from the uploaded image filenames to the three expected generated background filenames, reinforcing that future swaps require only replacing these exact files (no code changes)."
+          "description": "Remove the shimmer/shine styling from the long message (drop animate-shimmer) and render both the message and signature in solid pure white while keeping the existing font classes and whitespace-pre-wrap/scroll container behavior intact."
         }
       ]
     },
     {
-      "id": "REQ-11",
-      "summary": "Install user-provided MP3 as the hidden looping background music at the expected static filename so autoplay is attempted with interaction fallback and playback persists across route navigation.",
+      "id": "REQ-20",
+      "summary": "Reduce the YES button size on the Proposal page without changing its romantic styling or navigation behavior.",
       "acceptanceCriteria": [
-        "On initial site visit, the app attempts to start playing background music immediately; if the browser blocks autoplay, the first user interaction (click/tap) starts playback.",
-        "The background music loops continuously and has no visible audio player controls.",
-        "Music continues playing while navigating from Page 1 -> Page 2 -> Page 3 without restarting due to route changes.",
-        "Replacing frontend/public/assets/generated/background-music.mp3 with a different MP3 changes the music without any code changes."
+        "On /proposal, the YES button is visibly smaller than before (reduced padding and/or font size), while retaining the same styling and hover/transition behavior.",
+        "Clicking YES still navigates to /final."
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/generated/background-music.mp3",
-          "operation": "create",
-          "description": "Add the user-uploaded MP3 (Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k.mp3) to this exact path/filename so the existing background-audio logic can load it without code changes."
+          "path": "frontend/src/components/RomanticButton.tsx",
+          "operation": "modify",
+          "description": "Add support for a smaller size option (e.g., via an optional prop or className override) that only adjusts sizing tokens (padding/font-size) while keeping the same colors, rounded shape, backdrop-blur, and hover/transition behavior."
         },
         {
-          "path": "frontend/README-assets.md",
+          "path": "frontend/src/pages/ProposalPage.tsx",
           "operation": "modify",
-          "description": "Ensure the guide clearly states that background music is sourced from frontend/public/assets/generated/background-music.mp3 and that replacing that single file updates the music without any code changes."
+          "description": "Use the updated RomanticButton sizing API (or pass an override) so the YES button renders slightly smaller on /proposal while preserving the existing click handler that navigates to /final."
+        }
+      ]
+    },
+    {
+      "id": "REQ-21",
+      "summary": "Restyle the Enter Website gate with a Valentine/love theme and visible animated hearts on desktop and mobile while keeping the same enter-to-dismiss behavior.",
+      "acceptanceCriteria": [
+        "Before entering the site, the gate screen shows a love-themed visual style (romantic/love colors) rather than a plain black/white appearance.",
+        "The gate screen includes heart-themed animation(s) visible on both desktop and mobile.",
+        "Clicking/tapping “Enter the Website” still dismisses the gate and reveals the existing 3-page flow unchanged."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/EnterWebsiteGate.tsx",
+          "operation": "modify",
+          "description": "Update the gate screen styling to a more Valentine/love-themed look (romantic gradients/overlays) and render decorative heart elements behind/around the content; keep the current state-driven gate behavior and Enter button click-to-dismiss unchanged."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add heart-themed animation keyframes and utility classes used by EnterWebsiteGate (e.g., floating/drifting hearts, gentle pulsing), ensuring the hearts are visible on both desktop and mobile and do not affect the existing full-screen background rendering rules elsewhere."
         }
       ]
     }

@@ -1,55 +1,47 @@
 # Asset Replacement Guide
 
-This romantic three-page experience uses static assets that can be easily replaced without any code changes.
+This romantic 3-page website uses custom background images that can be easily replaced without modifying any code.
 
 ## Background Images
 
-Replace the following three background images with your own:
+The site uses three background images, one for each page. To replace them, simply copy your new images to the following paths:
 
-1. **Page 1 (Intro)**: `frontend/public/assets/generated/bg-page-1.dim_1920x1080.png`
-   - Current source: `InsMix_20260209_211147926.jpg` (beach collage with "Meri AayZu..." text)
-2. **Page 2 (Proposal)**: `frontend/public/assets/generated/bg-page-2.dim_1920x1080.png`
-   - Current source: `InsMix_20260209_231320300.jpg` (floral dress collage with flowers)
-3. **Page 3 (Final)**: `frontend/public/assets/generated/bg-page-3.dim_1920x1080.png`
-   - Current source: `InsMix_20260209_231554807.jpg` (romantic collage with roses and butterflies)
+### Page 1 (Intro Page)
+- **Path**: `frontend/public/assets/generated/bg-page-1.dim_1920x1080.png`
+- **Source**: InsMix_20260209_211147926-1.jpg
+- **Recommended size**: 1920x1080 or similar aspect ratio
+- **Format**: PNG or JPG
 
-### Image Requirements:
-- Format: PNG or JPG
-- Recommended dimensions: 1920x1080 or higher
-- The images will be displayed using letterbox/contain mode (never cropped)
-- Images will be centered with a black transparent overlay
+### Page 2 (Proposal Page)
+- **Path**: `frontend/public/assets/generated/bg-page-2.dim_1920x1080.png`
+- **Source**: InsMix_20260209_231320300-1.jpg
+- **Recommended size**: 1920x1080 or similar aspect ratio
+- **Format**: PNG or JPG
+
+### Page 3 (Final Message Page)
+- **Path**: `frontend/public/assets/generated/bg-page-3.dim_1920x1080.png`
+- **Source**: InsMix_20260209_231554807-1.jpg
+- **Recommended size**: 1920x1080 or similar aspect ratio
+- **Format**: PNG or JPG
 
 ## Background Music
 
-Replace the background music file:
+**Note**: Background music has been intentionally removed from this build to ensure the site loads and functions correctly. The site now operates without any audio playback.
 
-**Audio File**: `frontend/public/assets/generated/background-music.mp3`
-- Current source: `Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k.mp3`
-
-### Audio Requirements:
-- Format: MP3
-- The audio will autoplay on page load (subject to browser policies)
-- The audio will loop continuously
-- No visible controls will be shown
-- Music continues playing across all three pages
-
-## How to Replace
+## How to Replace Assets
 
 1. Navigate to `frontend/public/assets/generated/`
-2. Replace the files with your own, keeping the exact same filenames
-3. No code changes are needed
-4. Refresh your browser to see the changes
+2. Replace the existing image files with your new images
+3. Keep the exact same filenames as listed above
+4. Restart the development server if it's running
+5. The new images will appear automatically on each page
 
-## Current Asset Mapping
+## Image Rendering Behavior
 
-For reference, the current assets are mapped as follows:
+All background images are rendered with the following properties:
+- **Positioning**: Centered
+- **Sizing**: Contain (letterbox) - images are never cropped
+- **Repeat**: No-repeat
+- **Overlay**: Black translucent overlay above the image for better text readability
 
-| Page | Expected Filename | Source File |
-|------|------------------|-------------|
-| Page 1 (Intro) | `bg-page-1.dim_1920x1080.png` | `InsMix_20260209_211147926.jpg` |
-| Page 2 (Proposal) | `bg-page-2.dim_1920x1080.png` | `InsMix_20260209_231320300.jpg` |
-| Page 3 (Final) | `bg-page-3.dim_1920x1080.png` | `InsMix_20260209_231554807.jpg` |
-| Background Music | `background-music.mp3` | `Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k.mp3` |
-
-**Important**: Keep the exact filenames as specified above. The application references these specific paths.
-
+This ensures your images are always fully visible regardless of screen size or aspect ratio.
