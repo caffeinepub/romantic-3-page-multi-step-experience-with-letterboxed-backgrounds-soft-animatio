@@ -1,0 +1,13 @@
+{
+  "frontend/src/App.tsx": "Main app component with TanStack Router setup for three routes (intro, proposal, final) wrapped in BackgroundAudioProvider for persistent music playback.",
+  "frontend/src/pages/IntroPage.tsx": "Page 1 component displaying title \"Nitia...\" and paragraph with fade-in animations, plus a delayed bottom-right CTA box with shine/blink effects that navigates to the proposal page after 10 seconds.",
+  "frontend/src/pages/ProposalPage.tsx": "Page 2 component displaying centered \"Will you marry me ?\" question with fade-in animation and a romantic YES button that navigates to the final page.",
+  "frontend/src/pages/FinalPage.tsx": "Page 3 component displaying a scrollable long message with preserved line breaks and a bottom-right signature \"- YOUR ARSU\" in High Tower font and Kaitoke green color.",
+  "frontend/src/components/FullscreenBackground.tsx": "Reusable component that renders full-screen letterboxed background images with centered positioning, no-repeat, and a black transparent overlay for all pages.",
+  "frontend/src/components/BackgroundAudioProvider.tsx": "Provider component that creates a single looping audio element, attempts autoplay on mount with user-interaction fallback, and persists across route navigation.",
+  "frontend/src/components/RomanticButton.tsx": "Reusable romantic-styled button component with wine background, Emily font, and hover effects for consistent CTA styling.",
+  "frontend/src/assets/staticAssets.ts": "Centralized static asset path definitions for three background images and background music file, enabling easy file replacement without code changes.",
+  "frontend/src/index.css": "Global styles with custom romantic color palette (wine, unicorn-silver, honey-gold, kaitoke), font families (David, Emily, High Tower, Times New Roman), and animations (fade-in, delayed-fade-in, shine-blink).",
+  "frontend/tailwind.config.js": "Tailwind configuration extended with custom romantic colors, font families, and keyframe animations for fade-in, delayed-fade-in, and shine-blink effects.",
+  "frontend/README-assets.md": "Documentation explaining how to replace the three background images and audio file without code changes, now including explicit mapping from user-uploaded filenames to expected asset paths."
+}

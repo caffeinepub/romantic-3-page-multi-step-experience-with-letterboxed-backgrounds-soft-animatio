@@ -1,0 +1,59 @@
+{
+  "kind": "build_request",
+  "title": "Apply uploaded background images to Pages 1–3 and enable uploaded background music",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-10",
+      "text": "Replace the app’s three page background assets with the user-uploaded images by copying/renaming them into the expected static asset filenames so they render as the Page 1/2/3 full-screen letterboxed backgrounds.\n\nAsset mapping to apply:\n- Page 1 background: InsMix_20260209_211147926.jpg -> frontend/public/assets/generated/bg-page-1.dim_1920x1080.png\n- Page 2 background (floral dress collage): InsMix_20260209_231320300.jpg -> frontend/public/assets/generated/bg-page-2.dim_1920x1080.png\n- Page 3 background: InsMix_20260209_231554807.jpg -> frontend/public/assets/generated/bg-page-3.dim_1920x1080.png\n\nKeep the existing background rendering rules (contain/letterbox, centered, no-repeat, with black translucent overlay) unchanged.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Build add all 3 image's in page 1,2 and 3 and audio file in background music"
+        ]
+      },
+      "acceptanceCriteria": [
+        "When visiting route / (Page 1), the background image displayed is the one from InsMix_20260209_211147926.jpg, shown in contain/letterbox mode (not cropped) with the existing black overlay.",
+        "When navigating to /proposal (Page 2), the background image displayed is the floral dress collage (InsMix_20260209_231320300.jpg) in contain/letterbox mode with the existing black overlay.",
+        "When navigating to /final (Page 3), the background image displayed is InsMix_20260209_231554807.jpg in contain/letterbox mode with the existing black overlay.",
+        "No code changes are required to swap these three backgrounds in the future beyond replacing the three files at frontend/public/assets/generated/ with the exact same filenames."
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "text": "Install the user-uploaded audio file as the site’s background music by placing it at frontend/public/assets/generated/background-music.mp3 (keeping that exact filename), so it attempts to autoplay on site visit, loops continuously, has no visible controls, and continues playing uninterrupted across navigation between pages.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Build add all 3 image's in page 1,2 and 3 and audio file in background music"
+        ]
+      },
+      "acceptanceCriteria": [
+        "On initial site visit, the app attempts to start playing background music immediately; if the browser blocks autoplay, the first user interaction (click/tap) starts playback.",
+        "The background music loops continuously and has no visible audio player controls.",
+        "Music continues playing while navigating from Page 1 -> Page 2 -> Page 3 without restarting due to route changes.",
+        "Replacing frontend/public/assets/generated/background-music.mp3 with a different MP3 changes the music without any code changes."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not edit any files under frontend/src/components/ui or any paths listed in frontend.immutablePaths in SYSTEM_CONTEXT.",
+    "Keep the existing per-page background rendering behavior: background-size: contain (never cropped), centered, no-repeat, with a black translucent overlay behind text/UI.",
+    "Keep the existing background music behavior: hidden audio, autoplay attempt + interaction fallback, loop, and persistence across navigation."
+  ],
+  "nonGoals": [
+    "Do not change the page text content, typography system, colors, animations, or layout beyond what is necessary to apply the provided assets.",
+    "Do not add new routes or flows (e.g., the Valentine “Enter the Website” screen) as part of this request unless explicitly re-confirmed by the user in a new message.",
+    "No backend (Motoko) changes."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

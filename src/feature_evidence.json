@@ -1,0 +1,41 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-replace-the-app-s-three-page-background-assets-with-the-user-uploaded-images-by-copying-renaming-them-into-the-expected-static-asset-filenames-so-they-render-as-the-page-1-2-3-full-screen-letterboxed-backgrounds-asset-mapping-to-apply-page-1-background-insmix-20260209-211147926-jpg-frontend-public-assets-generated-bg-page-1-dim-1920x1080-png-page-2-background-floral-dress-collage-insmix-20260209-231320300-jpg-frontend-public-assets-generated-bg-page-2-dim-1920x1080-png-page-3-background-insmix-20260209-231554807-jpg-frontend-public-assets-generated-bg-page-3-dim-1920x1080-png-keep-the-existing-background-rendering-rules-contain-letterbox-centered-no-repeat-with-black-translucent-overlay-unchanged",
+      "featureTitle": "Replace the app’s three page background assets with the user-uploaded images by copying/renaming them into the expected static asset filenames so they render as the Page 1/2/3 full-screen letterboxed backgrounds.\n\nAsset mapping to apply:\n- Page 1 background: InsMix_20260209_211147926.jpg -> frontend/public/assets/generated/bg-page-1.dim_1920x1080.png\n- Page 2 background (floral dress collage): InsMix_20260209_231320300.jpg -> frontend/public/assets/generated/bg-page-2.dim_1920x1080.png\n- Page 3 background: InsMix_20260209_231554807.jpg -> frontend/public/assets/generated/bg-page-3.dim_1920x1080.png\n\nKeep the existing background rendering rules (contain/letterbox, centered, no-repeat, with black translucent overlay) unchanged.",
+      "files": [
+        "frontend/README-assets.md"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-10"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-install-the-user-uploaded-audio-file-as-the-site-s-background-music-by-placing-it-at-frontend-public-assets-generated-background-music-mp3-keeping-that-exact-filename-so-it-attempts-to-autoplay-on-site-visit-loops-continuously-has-no-visible-controls-and-continues-playing-uninterrupted-across-navigation-between-pages",
+      "featureTitle": "Install the user-uploaded audio file as the site’s background music by placing it at frontend/public/assets/generated/background-music.mp3 (keeping that exact filename), so it attempts to autoplay on site visit, loops continuously, has no visible controls, and continues playing uninterrupted across navigation between pages.",
+      "files": [
+        "frontend/README-assets.md"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-11"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

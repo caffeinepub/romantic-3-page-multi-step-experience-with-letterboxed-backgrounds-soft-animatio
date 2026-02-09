@@ -1,0 +1,22 @@
+{
+  "backend/main.mo": "Empty Motoko actor with no methods.",
+  "feature_evidence.json": "Feature evidence report describing background image and audio replacement mappings and related components.",
+  "frontend-file-summaries.txt": "Prewritten summaries of all major frontend source files for reference.",
+  "frontend/index.css": "Tailwind base setup with custom CSS variables for themes and global styling.",
+  "frontend/index.html": "HTML entry point mounting the React app and loading main.tsx.",
+  "frontend/README-assets.md": "Guide explaining how to replace the three background images and background music by overwriting generated asset files with the same filenames.",
+  "frontend/src/App.tsx": "Sets up TanStack Router routes and wraps pages with persistent BackgroundAudioProvider.",
+  "frontend/src/assets/staticAssets.ts": "Exports fixed paths for the three background images and background music file.",
+  "frontend/src/components/BackgroundAudioProvider.tsx": "Creates and manages a single looping audio element that attempts autoplay and persists across navigation.",
+  "frontend/src/components/FullscreenBackground.tsx": "Renders full-screen letterboxed background images with a dark overlay behind page content.",
+  "frontend/src/components/RomanticButton.tsx": "Stylized romantic-themed button component with hover scaling.",
+  "frontend/src/hooks/useActor.ts": "Hook that creates and caches a backend actor based on current Internet Identity and refreshes dependent queries.",
+  "frontend/src/hooks/useInternetIdentity.ts": "Context and hooks for managing Internet Identity login, stored sessions, and authentication state.",
+  "frontend/src/index.css": "Defines Tailwind layers, custom OKLCH color variables, dark mode variants, custom fonts, and utility animations for fade‑in and styling.",
+  "frontend/src/main.tsx": "Bootstraps the React app with React Query and Internet Identity provider, importing global styles and rendering App.",
+  "frontend/src/pages/FinalPage.tsx": "Renders the final message page with a full‑screen background, fade‑in text, scrollable content, and a signature overlay.",
+  "frontend/src/pages/IntroPage.tsx": "Shows the intro screen with a title, paragraph, background image, delayed CTA, and navigation to the proposal page.",
+  "frontend/src/pages/ProposalPage.tsx": "Displays the marriage proposal text with a background and a button that navigates to the final page.",
+  "frontend/tailwind.config.js": "Configures Tailwind with extended OKLCH color mappings, fonts, animations, container settings, and plugin integrations.",
+  "project_state.json": "Describes the project’s current multi‑page romantic experience, requirements, architecture notes, and feature tracking metadata."
+}

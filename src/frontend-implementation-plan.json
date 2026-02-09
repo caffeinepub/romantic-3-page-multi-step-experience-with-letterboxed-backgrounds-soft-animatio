@@ -1,0 +1,61 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Apply user-provided backgrounds for Pages 1–3 and install persistent looping background music",
+  "requirements": [
+    {
+      "id": "REQ-10",
+      "summary": "Replace Page 1–3 background images by overwriting the expected static asset filenames in frontend/public/assets/generated/ without changing existing contain/letterbox + overlay rendering behavior.",
+      "acceptanceCriteria": [
+        "When visiting route / (Page 1), the background image displayed is the one from InsMix_20260209_211147926.jpg, shown in contain/letterbox mode (not cropped) with the existing black overlay.",
+        "When navigating to /proposal (Page 2), the background image displayed is the floral dress collage (InsMix_20260209_231320300.jpg) in contain/letterbox mode with the existing black overlay.",
+        "When navigating to /final (Page 3), the background image displayed is InsMix_20260209_231554807.jpg in contain/letterbox mode with the existing black overlay.",
+        "No code changes are required to swap these three backgrounds in the future beyond replacing the three files at frontend/public/assets/generated/ with the exact same filenames."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/bg-page-1.dim_1920x1080.png",
+          "operation": "modify",
+          "description": "Overwrite this file’s contents with the user-uploaded image InsMix_20260209_211147926.jpg (copied/converted as needed) while keeping the exact target filename so existing background rendering continues unchanged."
+        },
+        {
+          "path": "frontend/public/assets/generated/bg-page-2.dim_1920x1080.png",
+          "operation": "modify",
+          "description": "Overwrite this file’s contents with the user-uploaded image InsMix_20260209_231320300.jpg (copied/converted as needed) while keeping the exact target filename so existing background rendering continues unchanged."
+        },
+        {
+          "path": "frontend/public/assets/generated/bg-page-3.dim_1920x1080.png",
+          "operation": "modify",
+          "description": "Overwrite this file’s contents with the user-uploaded image InsMix_20260209_231554807.jpg (copied/converted as needed) while keeping the exact target filename so existing background rendering continues unchanged."
+        },
+        {
+          "path": "frontend/README-assets.md",
+          "operation": "modify",
+          "description": "Update the asset replacement guide to explicitly document the provided mapping from the uploaded image filenames to the three expected generated background filenames, reinforcing that future swaps require only replacing these exact files (no code changes)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "summary": "Install user-provided MP3 as the hidden looping background music at the expected static filename so autoplay is attempted with interaction fallback and playback persists across route navigation.",
+      "acceptanceCriteria": [
+        "On initial site visit, the app attempts to start playing background music immediately; if the browser blocks autoplay, the first user interaction (click/tap) starts playback.",
+        "The background music loops continuously and has no visible audio player controls.",
+        "Music continues playing while navigating from Page 1 -> Page 2 -> Page 3 without restarting due to route changes.",
+        "Replacing frontend/public/assets/generated/background-music.mp3 with a different MP3 changes the music without any code changes."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/background-music.mp3",
+          "operation": "create",
+          "description": "Add the user-uploaded MP3 (Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k.mp3) to this exact path/filename so the existing background-audio logic can load it without code changes."
+        },
+        {
+          "path": "frontend/README-assets.md",
+          "operation": "modify",
+          "description": "Ensure the guide clearly states that background music is sourced from frontend/public/assets/generated/background-music.mp3 and that replacing that single file updates the music without any code changes."
+        }
+      ]
+    }
+  ]
+}
