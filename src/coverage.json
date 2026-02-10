@@ -1,46 +1,83 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-10T05:06:22.245Z",
+  "generatedAt": "2026-02-10T13:20:28.677Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 3,
-    "implemented": 3,
+    "total": 4,
+    "implemented": 4,
     "items": [
       {
-        "id": "REQ-1",
-        "summary": "Update Page 1 (IntroPage) heading text color to exactly #722F37 (wine) using a Tailwind arbitrary color class or equivalent so it renders with that exact hex value.",
+        "id": "REQ-5",
+        "summary": "Use the provided audio track file \"Soch_Na_Sake_FULL....\" as the app’s background music by adding it to `frontend/public/assets/` and ensuring the runtime audio source points to that exact file (either by updating `BackgroundAudioProvider` to reference the exact filename, or by replacing `/assets/background-music.mp3` with that track while keeping the `/assets/background-music.mp3` path working).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/IntroPage.tsx"
+          "frontend/public/assets/background-music.mp3",
+          "frontend/src/components/BackgroundAudioProvider.tsx",
+          "frontend/README-assets.md"
         ],
         "matchedFiles": [
-          "frontend/src/pages/IntroPage.tsx"
+          "frontend/src/components/BackgroundAudioProvider.tsx",
+          "frontend/README-assets.md"
         ]
       },
       {
-        "id": "REQ-2",
-        "summary": "Update Page 1 (IntroPage) body paragraph text color to exactly #E8E8E8 (unicorn silver) using a Tailwind arbitrary color class or equivalent so it renders with that exact hex value.",
+        "id": "REQ-6",
+        "summary": "Make background music start automatically and immediately without requiring the user to tap a dedicated Play button by (1) keeping the initial autoplay attempt on app load and (2) triggering a play attempt on the first existing user gesture in the flow (the \"Enter the Website\" click in `EnterWebsiteGate`) so music starts as soon as the user enters, without showing a separate play CTA.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/IntroPage.tsx"
+          "frontend/src/components/BackgroundAudioProvider.tsx",
+          "frontend/src/components/BackgroundAudioProvider.tsx",
+          "frontend/src/components/EnterWebsiteGate.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/pages/IntroPage.tsx"
+          "frontend/src/components/BackgroundAudioProvider.tsx",
+          "frontend/src/components/BackgroundAudioProvider.tsx",
+          "frontend/src/components/EnterWebsiteGate.tsx"
         ]
       },
       {
-        "id": "REQ-3",
-        "summary": "Update the Page 1 call-to-action element that navigates to the next page (the clickable CTA box on IntroPage) so its background color uses exactly #669966 (thyme), preserving the existing alpha/opacity behavior.",
+        "id": "REQ-7",
+        "summary": "Diagnose and fix why \"Music is not playing\" by adding minimal, actionable runtime diagnostics around the play attempt (e.g., capture and log the `.play()` rejection reason and the resolved audio asset URL), and ensure the audio element is created and used reliably across route changes via the existing `BackgroundAudioProvider` integration in `frontend/src/App.tsx`.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/IntroPage.tsx"
+          "frontend/src/components/BackgroundAudioProvider.tsx",
+          "frontend/src/components/BackgroundAudioProvider.tsx",
+          "frontend/src/App.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/pages/IntroPage.tsx"
+          "frontend/src/components/BackgroundAudioProvider.tsx",
+          "frontend/src/components/BackgroundAudioProvider.tsx"
+        ]
+      },
+      {
+        "id": "REQ-8",
+        "summary": "Keep project storage usage safe by avoiding duplicate audio copies: include only one background music file in `frontend/public/assets/` for runtime use and remove/avoid adding multiple variants of the same track.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/public/assets/Soch Na Sake FULL VIDEO SONG  AIRLIFT  Akshay Kumar, Nimrat Kaur  Arijit Singh, Tulsi Kumar - T-Series.mp3",
+          "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k (1).mp3",
+          "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k-1.mp3",
+          "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k-2.mp3",
+          "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k-3.mp3",
+          "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k-4.mp3",
+          "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k-5.mp3",
+          "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k-6.mp3",
+          "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k.mp3"
+        ],
+        "matchedFiles": [
+          "frontend/public/assets/Soch Na Sake FULL VIDEO SONG  AIRLIFT  Akshay Kumar, Nimrat Kaur  Arijit Singh, Tulsi Kumar - T-Series.mp3",
+          "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k (1).mp3",
+          "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k-1.mp3",
+          "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k-2.mp3",
+          "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k-3.mp3",
+          "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k-4.mp3",
+          "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k-5.mp3",
+          "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k-6.mp3",
+          "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k.mp3"
         ]
       }
     ]
@@ -50,7 +87,18 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/pages/IntroPage.tsx",
+    "frontend/README-assets.md",
+    "frontend/public/assets/Soch Na Sake FULL VIDEO SONG  AIRLIFT  Akshay Kumar, Nimrat Kaur  Arijit Singh, Tulsi Kumar - T-Series.mp3",
+    "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k (1).mp3",
+    "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k-1.mp3",
+    "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k-2.mp3",
+    "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k-3.mp3",
+    "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k-4.mp3",
+    "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k-5.mp3",
+    "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k-6.mp3",
+    "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k.mp3",
+    "frontend/src/components/BackgroundAudioProvider.tsx",
+    "frontend/src/components/EnterWebsiteGate.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

@@ -4,6 +4,7 @@ import ProposalPage from './pages/ProposalPage';
 import FinalPage from './pages/FinalPage';
 import RootLayout from './components/RootLayout';
 import AppErrorBoundary from './components/AppErrorBoundary';
+import BackgroundAudioProvider from './components/BackgroundAudioProvider';
 
 const rootRoute = createRootRoute({
   component: RootLayout,
@@ -40,7 +41,9 @@ declare module '@tanstack/react-router' {
 export default function App() {
   return (
     <AppErrorBoundary>
-      <RouterProvider router={router} />
+      <BackgroundAudioProvider>
+        <RouterProvider router={router} />
+      </BackgroundAudioProvider>
     </AppErrorBoundary>
   );
 }

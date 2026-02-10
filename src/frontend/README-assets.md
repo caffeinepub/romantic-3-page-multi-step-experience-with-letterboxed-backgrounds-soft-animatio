@@ -1,47 +1,62 @@
-# Asset Replacement Guide
-
-This romantic 3-page website uses custom background images that can be easily replaced without modifying any code.
+# Assets Documentation
 
 ## Background Images
 
-The site uses three background images, one for each page. To replace them, simply copy your new images to the following paths:
+The application uses three background images for the three-page romantic experience:
 
-### Page 1 (Intro Page)
-- **Path**: `frontend/public/assets/generated/bg-page-1.dim_1920x1080.png`
-- **Source**: InsMix_20260209_211147926-1.jpg
-- **Recommended size**: 1920x1080 or similar aspect ratio
-- **Format**: PNG or JPG
+1. **Page 1 (Intro)**: `frontend/public/assets/InsMix_20260210_175919593.jpg`
+   - Beach collage image with "meri nitaa" text
+   - Used on the intro page with title and CTA
 
-### Page 2 (Proposal Page)
-- **Path**: `frontend/public/assets/generated/bg-page-2.dim_1920x1080.png`
-- **Source**: InsMix_20260209_231320300-1.jpg
-- **Recommended size**: 1920x1080 or similar aspect ratio
-- **Format**: PNG or JPG
+2. **Page 2 (Proposal)**: `frontend/public/assets/generated/bg-page-2.dim_1920x1080.png`
+   - Romantic proposal background
+   - Used on the "Will you marry me?" page
 
-### Page 3 (Final Message Page)
-- **Path**: `frontend/public/assets/generated/bg-page-3.dim_1920x1080.png`
-- **Source**: InsMix_20260209_231554807-1.jpg
-- **Recommended size**: 1920x1080 or similar aspect ratio
-- **Format**: PNG or JPG
+3. **Page 3 (Final)**: `frontend/public/assets/generated/bg-page-3.dim_1920x1080.png`
+   - Final message background
+   - Used on the long message and signature page
+
+All backgrounds are rendered using the `FullscreenBackground` component with letterboxing, centered positioning, and a black transparent overlay.
 
 ## Background Music
 
-**Note**: Background music has been intentionally removed from this build to ensure the site loads and functions correctly. The site now operates without any audio playback.
+The application includes background music that plays throughout the user experience:
 
-## How to Replace Assets
+- **Audio File**: `frontend/public/assets/background-music.mp3`
+  - This file contains the "Soch Na Sake" track (from AIRLIFT)
+  - Single source-of-truth for runtime background music
+  - Looped continuously during the experience
 
-1. Navigate to `frontend/public/assets/generated/`
-2. Replace the existing image files with your new images
-3. Keep the exact same filenames as listed above
-4. Restart the development server if it's running
-5. The new images will appear automatically on each page
+### Playback Behavior
 
-## Image Rendering Behavior
+1. **Autoplay Attempt**: The app attempts to autoplay music immediately on page load
+2. **User Gesture Fallback**: If autoplay is blocked by browser policy, music starts when the user clicks "Enter the Website"
+3. **Last Resort**: If both attempts fail, a "Play Music" button appears in the top-right corner
+4. **Persistence**: Audio continues playing across all route transitions (/, /proposal, /final)
+5. **Controls**: When playing, a mute/unmute toggle appears in the top-right corner
 
-All background images are rendered with the following properties:
-- **Positioning**: Centered
-- **Sizing**: Contain (letterbox) - images are never cropped
-- **Repeat**: No-repeat
-- **Overlay**: Black translucent overlay above the image for better text readability
+### Browser Compatibility
 
-This ensures your images are always fully visible regardless of screen size or aspect ratio.
+Modern browsers restrict autoplay of audio with sound. The app handles this gracefully:
+- Chrome/Edge: Autoplay typically blocked; starts on "Enter the Website" click
+- Firefox: May allow autoplay depending on user settings
+- Safari: Autoplay typically blocked; starts on user gesture
+- Mobile browsers: Almost always require user gesture
+
+### Technical Implementation
+
+- Audio is managed by `BackgroundAudioProvider` context
+- Single `<audio>` element created once and persists across routes
+- Volume set to 50% by default
+- Loop enabled for continuous playback
+- Comprehensive console diagnostics for debugging playback issues
+
+### Diagnostics
+
+The app logs detailed information to the browser console:
+- Audio source URL and loading status
+- Autoplay attempt results
+- User gesture playback attempts
+- Any errors with network state and ready state details
+
+Check the browser console for `[BackgroundAudio]` prefixed messages to diagnose playback issues.

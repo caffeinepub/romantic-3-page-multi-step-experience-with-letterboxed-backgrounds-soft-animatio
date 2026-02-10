@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from 'react';
 import { Heart } from 'lucide-react';
+import { useBackgroundAudio } from './BackgroundAudioProvider';
 
 interface EnterWebsiteGateProps {
   children: ReactNode;
@@ -7,8 +8,12 @@ interface EnterWebsiteGateProps {
 
 export default function EnterWebsiteGate({ children }: EnterWebsiteGateProps) {
   const [hasEntered, setHasEntered] = useState(false);
+  const { playFromGesture } = useBackgroundAudio();
 
-  const handleEnter = () => {
+  const handleEnter = async () => {
+    // Trigger audio playback on user gesture
+    await playFromGesture();
+    // Then proceed to show content
     setHasEntered(true);
   };
 

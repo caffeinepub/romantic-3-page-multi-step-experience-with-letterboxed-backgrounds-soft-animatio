@@ -2,10 +2,11 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-update-page-1-intropage-heading-text-color-to-exactly-722f37-wine-using-a-tailwind-arbitrary-color-class-or-equivalent-so-it-renders-with-that-exact-hex-value",
-      "featureTitle": "Update Page 1 (IntroPage) heading text color to exactly #722F37 (wine) using a Tailwind arbitrary color class or equivalent so it renders with that exact hex value.",
+      "featureId": "feature-use-the-provided-audio-track-file-soch-na-sake-full-as-the-app-s-background-music-by-adding-it-to-frontend-public-assets-and-ensuring-the-runtime-audio-source-points-to-that-exact-file-either-by-updating-backgroundaudioprovider-to-reference-the-exact-filename-or-by-replacing-assets-background-music-mp3-with-that-track-while-keeping-the-assets-background-music-mp3-path-working",
+      "featureTitle": "Use the provided audio track file \"Soch_Na_Sake_FULL....\" as the app’s background music by adding it to `frontend/public/assets/` and ensuring the runtime audio source points to that exact file (either by updating `BackgroundAudioProvider` to reference the exact filename, or by replacing `/assets/background-music.mp3` with that track while keeping the `/assets/background-music.mp3` path working).",
       "files": [
-        "frontend/src/pages/IntroPage.tsx"
+        "frontend/README-assets.md",
+        "frontend/src/components/BackgroundAudioProvider.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -15,15 +16,16 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-1"
+        "REQ-5"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-update-page-1-intropage-body-paragraph-text-color-to-exactly-e8e8e8-unicorn-silver-using-a-tailwind-arbitrary-color-class-or-equivalent-so-it-renders-with-that-exact-hex-value",
-      "featureTitle": "Update Page 1 (IntroPage) body paragraph text color to exactly #E8E8E8 (unicorn silver) using a Tailwind arbitrary color class or equivalent so it renders with that exact hex value.",
+      "featureId": "feature-make-background-music-start-automatically-and-immediately-without-requiring-the-user-to-tap-a-dedicated-play-button-by-1-keeping-the-initial-autoplay-attempt-on-app-load-and-2-triggering-a-play-attempt-on-the-first-existing-user-gesture-in-the-flow-the-enter-the-website-click-in-enterwebsitegate-so-music-starts-as-soon-as-the-user-enters-without-showing-a-separate-play-cta",
+      "featureTitle": "Make background music start automatically and immediately without requiring the user to tap a dedicated Play button by (1) keeping the initial autoplay attempt on app load and (2) triggering a play attempt on the first existing user gesture in the flow (the \"Enter the Website\" click in `EnterWebsiteGate`) so music starts as soon as the user enters, without showing a separate play CTA.",
       "files": [
-        "frontend/src/pages/IntroPage.tsx"
+        "frontend/src/components/BackgroundAudioProvider.tsx",
+        "frontend/src/components/EnterWebsiteGate.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -33,15 +35,15 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-2"
+        "REQ-6"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-update-the-page-1-call-to-action-element-that-navigates-to-the-next-page-the-clickable-cta-box-on-intropage-so-its-background-color-uses-exactly-669966-thyme-preserving-the-existing-alpha-opacity-behavior",
-      "featureTitle": "Update the Page 1 call-to-action element that navigates to the next page (the clickable CTA box on IntroPage) so its background color uses exactly #669966 (thyme), preserving the existing alpha/opacity behavior.",
+      "featureId": "feature-diagnose-and-fix-why-music-is-not-playing-by-adding-minimal-actionable-runtime-diagnostics-around-the-play-attempt-e-g-capture-and-log-the-play-rejection-reason-and-the-resolved-audio-asset-url-and-ensure-the-audio-element-is-created-and-used-reliably-across-route-changes-via-the-existing-backgroundaudioprovider-integration-in-frontend-src-app-tsx",
+      "featureTitle": "Diagnose and fix why \"Music is not playing\" by adding minimal, actionable runtime diagnostics around the play attempt (e.g., capture and log the `.play()` rejection reason and the resolved audio asset URL), and ensure the audio element is created and used reliably across route changes via the existing `BackgroundAudioProvider` integration in `frontend/src/App.tsx`.",
       "files": [
-        "frontend/src/pages/IntroPage.tsx"
+        "frontend/src/components/BackgroundAudioProvider.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -51,7 +53,23 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-3"
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-keep-project-storage-usage-safe-by-avoiding-duplicate-audio-copies-include-only-one-background-music-file-in-frontend-public-assets-for-runtime-use-and-remove-avoid-adding-multiple-variants-of-the-same-track",
+      "featureTitle": "Keep project storage usage safe by avoiding duplicate audio copies: include only one background music file in `frontend/public/assets/` for runtime use and remove/avoid adding multiple variants of the same track.",
+      "files": [],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
       ],
       "confidence": "high"
     }

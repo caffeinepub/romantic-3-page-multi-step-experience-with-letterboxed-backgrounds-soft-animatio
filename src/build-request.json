@@ -1,75 +1,89 @@
 {
   "kind": "build_request",
-  "title": "Apply Page 1 color updates (wine heading, unicorn silver body, thyme CTA button)",
+  "title": "Autoplay background music immediately using 'Soch_Na_Sake_FULL....' file (no Play button tap)",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-1",
-      "text": "Update Page 1 (IntroPage) heading text color to exactly #722F37 (wine) using a Tailwind arbitrary color class or equivalent so it renders with that exact hex value.",
+      "id": "REQ-5",
+      "text": "Use the provided audio track file \"Soch_Na_Sake_FULL....\" as the app’s background music by adding it to `frontend/public/assets/` and ensuring the runtime audio source points to that exact file (either by updating `BackgroundAudioProvider` to reference the exact filename, or by replacing `/assets/background-music.mp3` with that track while keeping the `/assets/background-music.mp3` path working).",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-8",
-          "msg-10"
+          "msg-user-1"
         ],
         "quotes": [
-          "1. 722F37",
-          "Apply the changes now"
+          "Music should start automatically and immediately user doesn't required to tap on play button and use the file \" Soch_Na_Sake_FULL....\""
         ]
       },
       "acceptanceCriteria": [
-        "On the Intro page, the main heading renders in hex color #722F37.",
-        "The change is visible in the browser and is not dependent on existing theme tokens such as `text-wine`."
+        "The background audio file used at runtime is the user-provided \"Soch_Na_Sake_FULL....\" track (not a different placeholder).",
+        "The app does not request the track from a missing/404 asset URL.",
+        "Audio continues looping as configured (loop enabled)."
       ]
     },
     {
-      "id": "REQ-2",
-      "text": "Update Page 1 (IntroPage) body paragraph text color to exactly #E8E8E8 (unicorn silver) using a Tailwind arbitrary color class or equivalent so it renders with that exact hex value.",
+      "id": "REQ-6",
+      "text": "Make background music start automatically and immediately without requiring the user to tap a dedicated Play button by (1) keeping the initial autoplay attempt on app load and (2) triggering a play attempt on the first existing user gesture in the flow (the \"Enter the Website\" click in `EnterWebsiteGate`) so music starts as soon as the user enters, without showing a separate play CTA.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-8",
-          "msg-10"
+          "msg-user-1"
         ],
         "quotes": [
-          "2. E8E8E8",
-          "Apply the changes now"
+          "Music should start automatically and immediately user doesn't required to tap on play button"
         ]
       },
       "acceptanceCriteria": [
-        "On the Intro page, the main paragraph renders in hex color #E8E8E8.",
-        "The paragraph remains readable against the background and the color change is visible in the browser."
+        "On initial page load, the app attempts to autoplay the background music.",
+        "When the user clicks \"Enter the Website\", the app triggers a play attempt so music starts immediately after entering on browsers that require a user gesture.",
+        "The user is not required to press a separate \"Play Music\" button to start background music under normal browser autoplay-gesture rules.",
+        "If autoplay is still blocked by the browser, the app remains usable and does not crash (fallback behavior may still appear as a last resort)."
       ]
     },
     {
-      "id": "REQ-3",
-      "text": "Update the Page 1 call-to-action element that navigates to the next page (the clickable CTA box on IntroPage) so its background color uses exactly #669966 (thyme), preserving the existing alpha/opacity behavior.",
+      "id": "REQ-7",
+      "text": "Diagnose and fix why \"Music is not playing\" by adding minimal, actionable runtime diagnostics around the play attempt (e.g., capture and log the `.play()` rejection reason and the resolved audio asset URL), and ensure the audio element is created and used reliably across route changes via the existing `BackgroundAudioProvider` integration in `frontend/src/App.tsx`.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-8",
-          "msg-10"
+          "msg-user-1"
         ],
         "quotes": [
-          "3. 669966",
-          "Apply the changes now"
+          "Music is not playing"
         ]
       },
       "acceptanceCriteria": [
-        "On the Intro page, the clickable CTA box (that navigates to the proposal page) has a background color based on hex #669966.",
-        "The CTA box still navigates to the next page when clicked.",
-        "Hover/transition behavior remains present after the color update."
+        "If audio fails to start, the console logs clearly indicate whether the failure is due to autoplay policy, missing asset (404), unsupported format, or another play() error.",
+        "Navigating between routes (`/` → `/proposal` → `/final`) does not restart the track from the beginning (single provider-managed audio instance remains active)."
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Keep project storage usage safe by avoiding duplicate audio copies: include only one background music file in `frontend/public/assets/` for runtime use and remove/avoid adding multiple variants of the same track.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-1"
+        ],
+        "quotes": [
+          "use the file \" Soch_Na_Sake_FULL....\""
+        ]
+      },
+      "acceptanceCriteria": [
+        "There is a single source-of-truth background music file used by the app at runtime (no duplicate copies referenced or shipped).",
+        "Build output does not include multiple large redundant MP3 variants for the same track."
       ]
     }
   ],
   "constraints": [
-    "Do not edit files under frontend/src/components/ui (read-only).",
-    "Do not edit immutable hook/bootstrap files: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx."
+    "Do not modify any files under `frontend/src/components/ui` (read-only Shadcn components).",
+    "Do not edit immutable hook files: `frontend/src/hooks/useInternetIdentity.ts`, `frontend/src/hooks/useInternetIdentity.tsx`, `frontend/src/hooks/useActor.ts`, `frontend/src/main.tsx`.",
+    "Backend must remain a single Motoko actor; do not introduce additional backend services."
   ],
   "nonGoals": [
-    "No backend (Motoko) changes.",
-    "No changes to Page 2/ProposalPage button styling unless required to satisfy the Page 1 CTA color request.",
-    "No text/content copy edits (only color changes requested)."
+    "Adding a full music player UI (playlist, scrubber, track selection).",
+    "Implementing real-time features or third-party audio streaming.",
+    "Changing the 3-page app flow or adding new pages."
   ],
   "imageRequirements": {
     "required": [],
