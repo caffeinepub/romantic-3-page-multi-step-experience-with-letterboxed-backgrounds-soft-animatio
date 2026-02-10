@@ -1,138 +1,73 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Autoplay background music using provided Soch Na Sake track without a separate play button",
+  "title": "Default 'Soch Na Sake…' background music, preserve autoplay fallbacks, and move song picker to top",
   "requirements": [
     {
-      "id": "REQ-5",
-      "summary": "Use the provided 'Soch_Na_Sake_FULL....' track as the single runtime background music source and keep the /assets/background-music.mp3 path working.",
+      "id": "REQ-1",
+      "summary": "Replace the runtime default background music asset with the uploaded track whose filename starts with \"Soch Na Sake\", while keeping local file picking and showing an English fallback message if the default asset fails to load.",
       "acceptanceCriteria": [
-        "The background audio file used at runtime is the user-provided \"Soch_Na_Sake_FULL....\" track (not a different placeholder).",
-        "The app does not request the track from a missing/404 asset URL.",
-        "Audio continues looping as configured (loop enabled)."
+        "On a fresh load (no prior interaction), the app’s default audio source is `'/assets/background-music.mp3'` and it corresponds to the uploaded track starting with \"Soch Na Sake\".",
+        "The app still allows users to choose a local audio file and switches playback to the chosen file as it does today.",
+        "If the default asset cannot be loaded, the UI shows an English status message indicating the default audio is unavailable and instructs the user to choose a song file."
       ],
       "file_operations": [
         {
           "path": "frontend/public/assets/background-music.mp3",
           "operation": "modify",
-          "description": "Replace the current background-music.mp3 file contents with the user-provided \"Soch Na Sake FULL VIDEO SONG  AIRLIFT  Akshay Kumar, Nimrat Kaur  Arijit Singh, Tulsi Kumar - T-Series.mp3\" audio (so runtime continues using /assets/background-music.mp3 while actually playing the requested track)."
+          "description": "Replace/overwrite this file so it contains the uploaded \"Soch Na Sake\" track (e.g., sourced from the uploaded asset file `frontend/public/assets/Soch Na Sake FULL VIDEO SONG  AIRLIFT  Akshay Kumar, Nimrat Kaur  Arijit Singh, Tulsi Kumar - T-Series.mp3`), keeping the public path unchanged for runtime default playback."
         },
         {
           "path": "frontend/src/components/BackgroundAudioProvider.tsx",
           "operation": "modify",
-          "description": "Ensure the runtime audio source remains '/assets/background-music.mp3' and add a small runtime check/log of the resolved audio URL to confirm it points to the expected asset (no 404)."
+          "description": "Ensure the default audio source remains `'/assets/background-music.mp3'` and that load failures set an English status message instructing the user to choose a local song file (preserving the existing local-file switching behavior)."
         },
         {
-          "path": "frontend/README-assets.md",
+          "path": "frontend/src/components/CornerAudioPicker.tsx",
           "operation": "modify",
-          "description": "Update background music documentation to state that the app uses /assets/background-music.mp3 and that this file should contain the 'Soch_Na_Sake_FULL....' track as the source-of-truth."
+          "description": "Confirm the status message from the audio provider is always displayed in English when present and that the local file picker continues to accept and switch playback to a user-selected local audio file."
         }
       ]
     },
     {
-      "id": "REQ-6",
-      "summary": "Autoplay on app load and retry playback on the existing 'Enter the Website' click (no dedicated Play Music CTA under normal autoplay-gesture rules).",
+      "id": "REQ-2",
+      "summary": "Attempt autoplay immediately on site open and preserve graceful fallbacks via the Enter gate and a manual \"Play Music\" button if needed.",
       "acceptanceCriteria": [
-        "On initial page load, the app attempts to autoplay the background music.",
-        "When the user clicks \"Enter the Website\", the app triggers a play attempt so music starts immediately after entering on browsers that require a user gesture.",
-        "The user is not required to press a separate \"Play Music\" button to start background music under normal browser autoplay-gesture rules.",
-        "If autoplay is still blocked by the browser, the app remains usable and does not crash (fallback behavior may still appear as a last resort)."
+        "When the site loads, an autoplay attempt is made without requiring navigation or additional clicks.",
+        "If the browser blocks autoplay, clicking \"Enter the Website\" triggers a playback attempt.",
+        "If autoplay and gesture-based playback both fail, a \"Play Music\" button appears and starts playback when clicked."
       ],
       "file_operations": [
         {
           "path": "frontend/src/components/BackgroundAudioProvider.tsx",
           "operation": "modify",
-          "description": "Refine autoplay behavior: keep the initial autoplay attempt on mount, and adjust fallback UI logic so a dedicated 'Play Music' button is not shown immediately on the first blocked attempt (only allow last-resort fallback after a user-gesture retry still fails)."
-        },
-        {
-          "path": "frontend/src/components/BackgroundAudioProvider.tsx",
-          "operation": "modify",
-          "description": "Expose a user-gesture play method via the existing context (e.g., a 'playFromGesture' function or equivalent) that performs a play attempt even if the initial autoplay was blocked."
+          "description": "Verify and (if needed) refine the initial autoplay attempt on provider mount, ensure the Enter-gate gesture path triggers another playback attempt, and ensure the manual \"Play Music\" button reliably appears only when automatic and gesture-based playback attempts have not succeeded."
         },
         {
           "path": "frontend/src/components/EnterWebsiteGate.tsx",
           "operation": "modify",
-          "description": "Hook into the existing \"Enter the Website\" click to trigger the background music play attempt (call the BackgroundAudioProvider context play method before/while setting hasEntered=true) so playback starts immediately after entering on autoplay-restricted browsers."
+          "description": "Ensure clicking \"Enter the Website\" continues to trigger a non-blocking playback attempt via the provider’s gesture-based play function, preserving the existing flow to reveal the site content immediately."
         }
       ]
     },
     {
-      "id": "REQ-7",
-      "summary": "Add minimal, actionable runtime diagnostics around audio play attempts and ensure the provider-managed audio instance persists across route changes.",
+      "id": "REQ-3",
+      "summary": "Move the fixed-position song picker from the bottom to the top of the viewport without overlapping the top-right play/mute controls, keeping all labels in English.",
       "acceptanceCriteria": [
-        "If audio fails to start, the console logs clearly indicate whether the failure is due to autoplay policy, missing asset (404), unsupported format, or another play() error.",
-        "Navigating between routes (`/` → `/proposal` → `/final`) does not restart the track from the beginning (single provider-managed audio instance remains active)."
+        "The song picker UI is positioned at the top of the viewport (not bottom) across all routes.",
+        "The song picker does not overlap the top-right play/mute UI controls at common viewport sizes (mobile and desktop).",
+        "All user-facing labels in the song picker remain in English (e.g., \"Choose Song\", status messages)."
       ],
       "file_operations": [
         {
+          "path": "frontend/src/components/CornerAudioPicker.tsx",
+          "operation": "modify",
+          "description": "Update the fixed positioning from bottom-left to top-left (or another top placement) and adjust spacing/layout so it does not overlap the provider’s top-right play/mute controls on mobile and desktop, while keeping all song-picker labels/messages in English."
+        },
+        {
           "path": "frontend/src/components/BackgroundAudioProvider.tsx",
           "operation": "modify",
-          "description": "Add targeted console diagnostics: log the resolved audio.src (and/or currentSrc when available) and capture/log the full play() rejection (name/message) for both the initial autoplay attempt and the gesture-triggered attempt to distinguish autoplay-policy blocks vs missing asset vs other errors."
-        },
-        {
-          "path": "frontend/src/components/BackgroundAudioProvider.tsx",
-          "operation": "modify",
-          "description": "Harden audio element lifecycle: ensure the audio element is created exactly once in the provider (already wrapped at App level) and is not recreated/restarted on route navigation; keep cleanup only on provider unmount."
-        },
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Verify BackgroundAudioProvider remains mounted above RouterProvider (and not conditionally remounted) so route changes do not restart audio; adjust only if needed."
-        }
-      ]
-    },
-    {
-      "id": "REQ-8",
-      "summary": "Avoid shipping duplicate audio variants by keeping only one background music file in frontend/public/assets used at runtime.",
-      "acceptanceCriteria": [
-        "There is a single source-of-truth background music file used by the app at runtime (no duplicate copies referenced or shipped).",
-        "Build output does not include multiple large redundant MP3 variants for the same track."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/public/assets/Soch Na Sake FULL VIDEO SONG  AIRLIFT  Akshay Kumar, Nimrat Kaur  Arijit Singh, Tulsi Kumar - T-Series.mp3",
-          "operation": "delete",
-          "description": "Delete the original long-filename track after its contents have been consolidated into frontend/public/assets/background-music.mp3, to ensure only one runtime audio file is shipped."
-        },
-        {
-          "path": "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k (1).mp3",
-          "operation": "delete",
-          "description": "Remove redundant duplicate variant so only one runtime background music file remains in frontend/public/assets/."
-        },
-        {
-          "path": "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k-1.mp3",
-          "operation": "delete",
-          "description": "Remove redundant duplicate variant so only one runtime background music file remains in frontend/public/assets/."
-        },
-        {
-          "path": "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k-2.mp3",
-          "operation": "delete",
-          "description": "Remove redundant duplicate variant so only one runtime background music file remains in frontend/public/assets/."
-        },
-        {
-          "path": "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k-3.mp3",
-          "operation": "delete",
-          "description": "Remove redundant duplicate variant so only one runtime background music file remains in frontend/public/assets/."
-        },
-        {
-          "path": "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k-4.mp3",
-          "operation": "delete",
-          "description": "Remove redundant duplicate variant so only one runtime background music file remains in frontend/public/assets/."
-        },
-        {
-          "path": "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k-5.mp3",
-          "operation": "delete",
-          "description": "Remove redundant duplicate variant so only one runtime background music file remains in frontend/public/assets/."
-        },
-        {
-          "path": "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k-6.mp3",
-          "operation": "delete",
-          "description": "Remove redundant duplicate variant so only one runtime background music file remains in frontend/public/assets/."
-        },
-        {
-          "path": "frontend/public/assets/Soch_Na_Sake_FULL_VIDEO_SONG_AIRLIFT_Akshay_Kumar,_Nimrat_Kaur_Arijit_Singh,_Tulsi_Kumar_128k.mp3",
-          "operation": "delete",
-          "description": "Remove redundant duplicate variant so only one runtime background music file remains in frontend/public/assets/."
+          "description": "Confirm the top-right play/mute control positioning remains unchanged and visually non-overlapping with the moved song picker across routes."
         }
       ]
     }

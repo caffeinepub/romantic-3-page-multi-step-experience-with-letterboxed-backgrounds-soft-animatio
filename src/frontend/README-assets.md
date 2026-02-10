@@ -4,7 +4,7 @@
 
 The application uses three background images for the three-page romantic experience:
 
-1. **Page 1 (Intro)**: `frontend/public/assets/InsMix_20260210_175919593.jpg`
+1. **Page 1 (Intro)**: `frontend/public/assets/InsMix_20260210_185632600.jpg`
    - Beach collage image with "meri nitaa" text
    - Used on the intro page with title and CTA
 
@@ -47,7 +47,7 @@ Modern browsers restrict autoplay of audio with sound. The app handles this grac
 
 - Audio is managed by `BackgroundAudioProvider` context
 - Single `<audio>` element created once and persists across routes
-- Volume set to 50% by default
+- Volume set to 100% (1.0) by default for loud playback
 - Loop enabled for continuous playback
 - Comprehensive console diagnostics for debugging playback issues
 

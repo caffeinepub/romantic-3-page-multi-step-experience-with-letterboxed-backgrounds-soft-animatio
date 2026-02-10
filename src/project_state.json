@@ -1,43 +1,24 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "Project to deploy an app/game with background music that plays automatically on start.",
+  "summary": "Music player site: set a specific uploaded track as the default, auto-play it on site load, and move the song selection bar to the top while keeping uploads enabled.",
   "architectural_notes": [],
-  "known_issues": [
-    "Background music is not playing currently.",
-    "Build/deployment encountered an internal configuration problem (Caffeine team)."
-  ],
-  "isFixRequest": true,
+  "known_issues": [],
+  "isFixRequest": false,
   "existing_features": [
     {
-      "id": "feature-use-the-provided-audio-track-file-soch-na-sake-full-as-the-app-s-background-music-by-adding-it-to-frontend-public-assets-and-ensuring-the-runtime-audio-source-points-to-that-exact-file-either-by-updating-backgroundaudioprovider-to-reference-the-exact-filename-or-by-replacing-assets-background-music-mp3-with-that-track-while-keeping-the-assets-background-music-mp3-path-working",
-      "title": "Use the provided audio track file \"Soch_Na_Sake_FULL....\" as the app’s background music by adding it to `frontend/public/assets/` and ensuring the runtime audio source points to that exact file (either by updating `BackgroundAudioProvider` to reference the exact filename, or by replacing `/assets/background-music.mp3` with that track while keeping the `/assets/background-music.mp3` path working).",
+      "id": "feature-set-the-site-s-default-background-music-to-the-uploaded-song-whose-filename-starts-with-soch-na-sake-by-making-that-track-the-runtime-default-audio-asset-at-frontend-public-assets-background-music-mp3-replace-update-the-existing-default-music-file-as-needed-while-keeping-the-local-file-picker-feature-available",
+      "title": "Set the site’s default background music to the uploaded song whose filename starts with \"Soch Na Sake\" by making that track the runtime default audio asset at `frontend/public/assets/background-music.mp3` (replace/update the existing default music file as needed) while keeping the local file picker feature available.",
       "reqIds": [
-        "REQ-5"
+        "REQ-1"
       ],
       "version": 1
     },
     {
-      "id": "feature-make-background-music-start-automatically-and-immediately-without-requiring-the-user-to-tap-a-dedicated-play-button-by-1-keeping-the-initial-autoplay-attempt-on-app-load-and-2-triggering-a-play-attempt-on-the-first-existing-user-gesture-in-the-flow-the-enter-the-website-click-in-enterwebsitegate-so-music-starts-as-soon-as-the-user-enters-without-showing-a-separate-play-cta",
-      "title": "Make background music start automatically and immediately without requiring the user to tap a dedicated Play button by (1) keeping the initial autoplay attempt on app load and (2) triggering a play attempt on the first existing user gesture in the flow (the \"Enter the Website\" click in `EnterWebsiteGate`) so music starts as soon as the user enters, without showing a separate play CTA.",
+      "id": "feature-move-the-song-selection-control-the-fixed-position-song-picker-bar-button-from-the-bottom-of-the-page-to-the-upper-side-top-of-the-page-without-covering-the-existing-top-right-play-mute-controls",
+      "title": "Move the song selection control (the fixed-position song picker bar/button) from the bottom of the page to the upper side (top) of the page, without covering the existing top-right play/mute controls.",
       "reqIds": [
-        "REQ-6"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-diagnose-and-fix-why-music-is-not-playing-by-adding-minimal-actionable-runtime-diagnostics-around-the-play-attempt-e-g-capture-and-log-the-play-rejection-reason-and-the-resolved-audio-asset-url-and-ensure-the-audio-element-is-created-and-used-reliably-across-route-changes-via-the-existing-backgroundaudioprovider-integration-in-frontend-src-app-tsx",
-      "title": "Diagnose and fix why \"Music is not playing\" by adding minimal, actionable runtime diagnostics around the play attempt (e.g., capture and log the `.play()` rejection reason and the resolved audio asset URL), and ensure the audio element is created and used reliably across route changes via the existing `BackgroundAudioProvider` integration in `frontend/src/App.tsx`.",
-      "reqIds": [
-        "REQ-7"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-keep-project-storage-usage-safe-by-avoiding-duplicate-audio-copies-include-only-one-background-music-file-in-frontend-public-assets-for-runtime-use-and-remove-avoid-adding-multiple-variants-of-the-same-track",
-      "title": "Keep project storage usage safe by avoiding duplicate audio copies: include only one background music file in `frontend/public/assets/` for runtime use and remove/avoid adding multiple variants of the same track.",
-      "reqIds": [
-        "REQ-8"
+        "REQ-3"
       ],
       "version": 1
     }
@@ -45,12 +26,26 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Background music should autoplay immediately on app start (no user tap) using file \"Soch_Na_Sake_FULL....\"",
+      "summary": "Set uploaded track starting with \"Soch Na Sake\" as the default song in the site music player and auto-play it immediately on site load while keeping the upload feature unchanged.",
       "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Move the song selection bar from the bottom of the page to the upper side (top).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Ensure the default track attempts to auto-play immediately when the user opens the site, with the existing graceful fallback behavior (play-on-gesture via the Enter gate, and a visible manual \"Play Music\" button if needed) preserved.",
+      "reqIds": [
+        "REQ-2"
+      ],
       "status": "pending"
     }
   ],
-  "projectName": "Autoplay background music immediately using 'Soch_Na_Sake_FULL....' file (no Play button tap)",
+  "projectName": "Set 'Soch Na Sake…' as default autoplay track and move song picker to top",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

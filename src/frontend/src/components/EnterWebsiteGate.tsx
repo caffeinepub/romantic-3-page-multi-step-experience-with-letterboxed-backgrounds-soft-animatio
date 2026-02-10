@@ -11,9 +11,12 @@ export default function EnterWebsiteGate({ children }: EnterWebsiteGateProps) {
   const { playFromGesture } = useBackgroundAudio();
 
   const handleEnter = async () => {
-    // Trigger audio playback on user gesture
-    await playFromGesture();
-    // Then proceed to show content
+    // Trigger audio playback on user gesture (non-blocking)
+    playFromGesture().catch((err) => {
+      console.log('[EnterWebsiteGate] Audio playback attempt completed with error:', err);
+    });
+    
+    // Proceed to show content immediately, regardless of audio playback success
     setHasEntered(true);
   };
 

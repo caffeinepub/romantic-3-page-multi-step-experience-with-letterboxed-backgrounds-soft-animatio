@@ -1,51 +1,46 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-10T13:20:28.675Z",
-  "summary": "Diff implements autoplay attempt on mount, adds a play retry on the existing \"Enter the Website\" gesture, and adds console diagnostics around audio loading/play. However, the diff does not provide LLM-readable evidence that the runtime audio file is the user-provided \"Soch_Na_Sake_FULL....\" track, nor that duplicate audio variants were avoided/removed. Route-persistence via App.tsx cannot be confirmed from the provided diff snippets.",
+  "generatedAt": "2026-02-10T14:14:20.154Z",
+  "summary": "Diff shows the song picker UI was moved to a fixed top-left position with an English \"Choose Song\" label and added local-file validation/status display. No diff evidence shows the default background-music.mp3 asset being replaced/updated or any autoplay attempt/fallback behavior being implemented/changed.",
   "missing_requirements": [
     {
-      "id": "REQ-5",
-      "requirement": "Use the provided audio track file \"Soch_Na_Sake_FULL....\" as the app’s background music by adding it to `frontend/public/assets/` and ensuring the runtime audio source points to that exact file (or replace `/assets/background-music.mp3` while keeping that path working).",
-      "reason": "No new asset file was added (Added: 0), and the provider still points to `/assets/background-music.mp3`. The diff does not include evidence that `frontend/public/assets/background-music.mp3` was replaced with the user-provided \"Soch_Na_Sake_FULL....\" content or that a file with that exact name was added and referenced.",
+      "id": "REQ-1",
+      "requirement": "Set the default background music to the uploaded track starting with \"Soch Na Sake\" by making it the runtime default audio asset at `frontend/public/assets/background-music.mp3`, keep the local file picker, and show an English status message instructing the user to choose a song if the default asset cannot be loaded.",
+      "reason": "No diff evidence of updating/replacing `frontend/public/assets/background-music.mp3`, setting the default source to `/assets/background-music.mp3`, or implementing the specific \"default audio unavailable\" status messaging behavior. The only code change shown is to the picker component UI.",
       "evidence": [
-        "frontend/src/components/BackgroundAudioProvider.tsx"
+        "frontend/src/components/CornerAudioPicker.tsx"
       ]
     },
     {
-      "id": "REQ-7",
-      "requirement": "Ensure the audio element is created and used reliably across route changes via the existing `BackgroundAudioProvider` integration in `frontend/src/App.tsx` (so route navigation does not restart the track).",
-      "reason": "While `BackgroundAudioProvider` creates a single audio element in a mount-only effect, the diff does not show `frontend/src/App.tsx` (or any routing/root composition code) to confirm the provider is mounted above the router and is not remounted on route transitions.",
+      "id": "REQ-2",
+      "requirement": "Attempt to auto-play the default track immediately on site open, preserving fallback behavior (Enter gate triggers play attempt; if both fail, show manual \"Play Music\" button).",
+      "reason": "No diff evidence of autoplay attempt-on-load logic, Enter-gate-triggered playback attempt wiring, or a manual \"Play Music\" button fallback. The shown code changes are limited to the song picker UI.",
       "evidence": [
-        "frontend-file-summaries.txt",
-        "frontend/src/components/BackgroundAudioProvider.tsx"
-      ]
-    },
-    {
-      "id": "REQ-8",
-      "requirement": "Avoid duplicate audio copies: include only one background music file in `frontend/public/assets/` for runtime use and remove/avoid adding multiple variants of the same track.",
-      "reason": "The diff shows no added/removed asset files (Added: 0, Removed: 0) and does not provide a verifiable listing of audio assets under `frontend/public/assets/` to confirm that only one source-of-truth music file ships and no duplicates exist.",
-      "evidence": [
-        "frontend/README-assets.md",
-        "frontend-file-summaries.txt"
+        "frontend/src/components/CornerAudioPicker.tsx"
       ]
     }
   ],
   "hallucinated_features": [
     {
-      "description": "Mute/unmute UI controls for background music (using Volume2/VolumeX icons) and related state management.",
-      "reason": "Requirements focus on autoplay + gesture retry + diagnostics and explicitly list a non-goal of adding a full music player UI. While this is not a full player, mute/unmute controls were not requested as part of REQ-5/6/7/8.",
+      "description": "Added client-side file-type validation for uploaded audio with an `alert()` on invalid types.",
+      "reason": "BuildRequest did not request adding validation/alerts for chosen files; it only required keeping the local file picker behavior available.",
       "evidence": [
-        "frontend/src/components/BackgroundAudioProvider.tsx"
+        "frontend/src/components/CornerAudioPicker.tsx"
+      ]
+    },
+    {
+      "description": "Added UI display of the selected filename as \"Playing: {selectedFileName}\".",
+      "reason": "Not requested in requirements/AC; could be acceptable but is additional functionality beyond moving the picker and setting default/autoplay behavior.",
+      "evidence": [
+        "frontend/src/components/CornerAudioPicker.tsx"
       ]
     }
   ],
-  "confidence": 0.62,
+  "confidence": 0.64,
   "changed_files": [
     "frontend-file-summaries.txt",
-    "frontend/README-assets.md",
-    "frontend/src/components/BackgroundAudioProvider.tsx",
-    "frontend/src/components/EnterWebsiteGate.tsx",
+    "frontend/src/components/CornerAudioPicker.tsx",
     "project_state.json"
   ]
 }

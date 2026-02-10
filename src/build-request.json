@@ -1,89 +1,74 @@
 {
   "kind": "build_request",
-  "title": "Autoplay background music immediately using 'Soch_Na_Sake_FULL....' file (no Play button tap)",
+  "title": "Set 'Soch Na Sake…' as default autoplay track and move song picker to top",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-5",
-      "text": "Use the provided audio track file \"Soch_Na_Sake_FULL....\" as the app’s background music by adding it to `frontend/public/assets/` and ensuring the runtime audio source points to that exact file (either by updating `BackgroundAudioProvider` to reference the exact filename, or by replacing `/assets/background-music.mp3` with that track while keeping the `/assets/background-music.mp3` path working).",
+      "id": "REQ-1",
+      "text": "Set the site’s default background music to the uploaded song whose filename starts with \"Soch Na Sake\" by making that track the runtime default audio asset at `frontend/public/assets/background-music.mp3` (replace/update the existing default music file as needed) while keeping the local file picker feature available.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-user-1"
+          "msg-6"
         ],
         "quotes": [
-          "Music should start automatically and immediately user doesn't required to tap on play button and use the file \" Soch_Na_Sake_FULL....\""
+          "Build it and add the song as default \nSong file name starts from \"Soch Na sake....\""
         ]
       },
       "acceptanceCriteria": [
-        "The background audio file used at runtime is the user-provided \"Soch_Na_Sake_FULL....\" track (not a different placeholder).",
-        "The app does not request the track from a missing/404 asset URL.",
-        "Audio continues looping as configured (loop enabled)."
+        "On a fresh load (no prior interaction), the app’s default audio source is `'/assets/background-music.mp3'` and it corresponds to the uploaded track starting with \"Soch Na Sake\".",
+        "The app still allows users to choose a local audio file and switches playback to the chosen file as it does today.",
+        "If the default asset cannot be loaded, the UI shows an English status message indicating the default audio is unavailable and instructs the user to choose a song file."
       ]
     },
     {
-      "id": "REQ-6",
-      "text": "Make background music start automatically and immediately without requiring the user to tap a dedicated Play button by (1) keeping the initial autoplay attempt on app load and (2) triggering a play attempt on the first existing user gesture in the flow (the \"Enter the Website\" click in `EnterWebsiteGate`) so music starts as soon as the user enters, without showing a separate play CTA.",
+      "id": "REQ-2",
+      "text": "Ensure the default track attempts to auto-play immediately when the user opens the site, with the existing graceful fallback behavior (play-on-gesture via the Enter gate, and a visible manual \"Play Music\" button if needed) preserved.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-user-1"
+          "msg-4",
+          "msg-6"
         ],
         "quotes": [
-          "Music should start automatically and immediately user doesn't required to tap on play button"
+          "2. Auto play immediately when user open the site",
+          "Build it and add the song as default \nSong file name starts from \"Soch Na sake....\""
         ]
       },
       "acceptanceCriteria": [
-        "On initial page load, the app attempts to autoplay the background music.",
-        "When the user clicks \"Enter the Website\", the app triggers a play attempt so music starts immediately after entering on browsers that require a user gesture.",
-        "The user is not required to press a separate \"Play Music\" button to start background music under normal browser autoplay-gesture rules.",
-        "If autoplay is still blocked by the browser, the app remains usable and does not crash (fallback behavior may still appear as a last resort)."
+        "When the site loads, an autoplay attempt is made without requiring navigation or additional clicks.",
+        "If the browser blocks autoplay, clicking \"Enter the Website\" triggers a playback attempt.",
+        "If autoplay and gesture-based playback both fail, a \"Play Music\" button appears and starts playback when clicked."
       ]
     },
     {
-      "id": "REQ-7",
-      "text": "Diagnose and fix why \"Music is not playing\" by adding minimal, actionable runtime diagnostics around the play attempt (e.g., capture and log the `.play()` rejection reason and the resolved audio asset URL), and ensure the audio element is created and used reliably across route changes via the existing `BackgroundAudioProvider` integration in `frontend/src/App.tsx`.",
+      "id": "REQ-3",
+      "text": "Move the song selection control (the fixed-position song picker bar/button) from the bottom of the page to the upper side (top) of the page, without covering the existing top-right play/mute controls.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-user-1"
+          "msg-5"
         ],
         "quotes": [
-          "Music is not playing"
+          "And one more thing place this song selection baar in upper side not in bottom"
         ]
       },
       "acceptanceCriteria": [
-        "If audio fails to start, the console logs clearly indicate whether the failure is due to autoplay policy, missing asset (404), unsupported format, or another play() error.",
-        "Navigating between routes (`/` → `/proposal` → `/final`) does not restart the track from the beginning (single provider-managed audio instance remains active)."
-      ]
-    },
-    {
-      "id": "REQ-8",
-      "text": "Keep project storage usage safe by avoiding duplicate audio copies: include only one background music file in `frontend/public/assets/` for runtime use and remove/avoid adding multiple variants of the same track.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-user-1"
-        ],
-        "quotes": [
-          "use the file \" Soch_Na_Sake_FULL....\""
-        ]
-      },
-      "acceptanceCriteria": [
-        "There is a single source-of-truth background music file used by the app at runtime (no duplicate copies referenced or shipped).",
-        "Build output does not include multiple large redundant MP3 variants for the same track."
+        "The song picker UI is positioned at the top of the viewport (not bottom) across all routes.",
+        "The song picker does not overlap the top-right play/mute UI controls at common viewport sizes (mobile and desktop).",
+        "All user-facing labels in the song picker remain in English (e.g., \"Choose Song\", status messages)."
       ]
     }
   ],
   "constraints": [
-    "Do not modify any files under `frontend/src/components/ui` (read-only Shadcn components).",
-    "Do not edit immutable hook files: `frontend/src/hooks/useInternetIdentity.ts`, `frontend/src/hooks/useInternetIdentity.tsx`, `frontend/src/hooks/useActor.ts`, `frontend/src/main.tsx`.",
-    "Backend must remain a single Motoko actor; do not introduce additional backend services."
+    "Do not edit files under `frontend/src/components/ui` (compose them instead).",
+    "Do not modify immutable hook/bootstrap files: `frontend/src/hooks/useInternetIdentity.ts`, `frontend/src/hooks/useInternetIdentity.tsx`, `frontend/src/hooks/useActor.ts`, `frontend/src/main.tsx`.",
+    "Keep the backend as a single Motoko actor; no backend changes are required for this request."
   ],
   "nonGoals": [
-    "Adding a full music player UI (playlist, scrubber, track selection).",
-    "Implementing real-time features or third-party audio streaming.",
-    "Changing the 3-page app flow or adding new pages."
+    "Add a backend upload endpoint or persist user audio files on-chain.",
+    "Add third-party audio streaming integrations or external storage.",
+    "Implement playlists, multiple saved tracks, or account-based music preferences."
   ],
   "imageRequirements": {
     "required": [],

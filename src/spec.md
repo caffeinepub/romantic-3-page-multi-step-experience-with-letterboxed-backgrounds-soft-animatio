@@ -1,12 +1,12 @@
 # Specification
 
 ## Summary
-**Goal:** Ensure the app uses the provided “Soch_Na_Sake_FULL....” audio file as the looping background music and starts playing automatically without requiring a dedicated Play button.
+**Goal:** Make the uploaded “Soch Na Sake…” track the default background music with immediate autoplay behavior, and reposition the song picker to the top of the page without UI overlap.
 
 **Planned changes:**
-- Add the provided “Soch_Na_Sake_FULL....” MP3 to `frontend/public/assets/` and update the runtime audio source to point to that exact file (either by referencing the filename directly in `BackgroundAudioProvider` or by replacing the file served at `/assets/background-music.mp3` while keeping that path working).
-- Keep an autoplay play attempt on initial app load, and additionally trigger a play attempt on the existing “Enter the Website” click in `EnterWebsiteGate` so audio starts immediately after the first user gesture when required by browser policies.
-- Add minimal runtime diagnostics around the play attempt (e.g., log the resolved asset URL and any `.play()` rejection reason) and ensure the existing `BackgroundAudioProvider` instance persists across route changes so playback doesn’t restart.
-- Avoid duplicate audio copies by keeping only one source-of-truth background music file in `frontend/public/assets/` for runtime use.
+- Replace/update `frontend/public/assets/background-music.mp3` so it matches the uploaded audio file whose name starts with “Soch Na Sake”, while keeping the local file picker behavior intact.
+- On site load, attempt to autoplay the default track immediately; preserve the existing fallback flow (Enter-gate gesture retry, then a visible “Play Music” button if needed).
+- Move the fixed song selection control from the bottom to the top of the viewport, ensuring it does not cover the existing top-right play/mute controls and that its labels/messages remain in English.
+- Add an English status message for the case where the default audio asset can’t be loaded, instructing the user to choose a song file.
 
-**User-visible outcome:** Background music starts automatically (or immediately after clicking “Enter the Website” on browsers that require a gesture), loops as before, and if playback fails the console provides clear diagnostics without breaking app navigation.
+**User-visible outcome:** On first visit, the site tries to start playing “Soch Na Sake…” automatically; if blocked, the existing Enter/Play fallbacks still work. The song picker appears at the top (without overlapping play/mute controls), and users can still choose a local song file.

@@ -2,11 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-use-the-provided-audio-track-file-soch-na-sake-full-as-the-app-s-background-music-by-adding-it-to-frontend-public-assets-and-ensuring-the-runtime-audio-source-points-to-that-exact-file-either-by-updating-backgroundaudioprovider-to-reference-the-exact-filename-or-by-replacing-assets-background-music-mp3-with-that-track-while-keeping-the-assets-background-music-mp3-path-working",
-      "featureTitle": "Use the provided audio track file \"Soch_Na_Sake_FULL....\" as the app’s background music by adding it to `frontend/public/assets/` and ensuring the runtime audio source points to that exact file (either by updating `BackgroundAudioProvider` to reference the exact filename, or by replacing `/assets/background-music.mp3` with that track while keeping the `/assets/background-music.mp3` path working).",
+      "featureId": "feature-set-the-site-s-default-background-music-to-the-uploaded-song-whose-filename-starts-with-soch-na-sake-by-making-that-track-the-runtime-default-audio-asset-at-frontend-public-assets-background-music-mp3-replace-update-the-existing-default-music-file-as-needed-while-keeping-the-local-file-picker-feature-available",
+      "featureTitle": "Set the site’s default background music to the uploaded song whose filename starts with \"Soch Na Sake\" by making that track the runtime default audio asset at `frontend/public/assets/background-music.mp3` (replace/update the existing default music file as needed) while keeping the local file picker feature available.",
       "files": [
-        "frontend/README-assets.md",
-        "frontend/src/components/BackgroundAudioProvider.tsx"
+        "frontend/src/components/CornerAudioPicker.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -16,16 +15,15 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-5"
+        "REQ-1"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-make-background-music-start-automatically-and-immediately-without-requiring-the-user-to-tap-a-dedicated-play-button-by-1-keeping-the-initial-autoplay-attempt-on-app-load-and-2-triggering-a-play-attempt-on-the-first-existing-user-gesture-in-the-flow-the-enter-the-website-click-in-enterwebsitegate-so-music-starts-as-soon-as-the-user-enters-without-showing-a-separate-play-cta",
-      "featureTitle": "Make background music start automatically and immediately without requiring the user to tap a dedicated Play button by (1) keeping the initial autoplay attempt on app load and (2) triggering a play attempt on the first existing user gesture in the flow (the \"Enter the Website\" click in `EnterWebsiteGate`) so music starts as soon as the user enters, without showing a separate play CTA.",
+      "featureId": "feature-move-the-song-selection-control-the-fixed-position-song-picker-bar-button-from-the-bottom-of-the-page-to-the-upper-side-top-of-the-page-without-covering-the-existing-top-right-play-mute-controls",
+      "featureTitle": "Move the song selection control (the fixed-position song picker bar/button) from the bottom of the page to the upper side (top) of the page, without covering the existing top-right play/mute controls.",
       "files": [
-        "frontend/src/components/BackgroundAudioProvider.tsx",
-        "frontend/src/components/EnterWebsiteGate.tsx"
+        "frontend/src/components/CornerAudioPicker.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -35,41 +33,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-6"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-diagnose-and-fix-why-music-is-not-playing-by-adding-minimal-actionable-runtime-diagnostics-around-the-play-attempt-e-g-capture-and-log-the-play-rejection-reason-and-the-resolved-audio-asset-url-and-ensure-the-audio-element-is-created-and-used-reliably-across-route-changes-via-the-existing-backgroundaudioprovider-integration-in-frontend-src-app-tsx",
-      "featureTitle": "Diagnose and fix why \"Music is not playing\" by adding minimal, actionable runtime diagnostics around the play attempt (e.g., capture and log the `.play()` rejection reason and the resolved audio asset URL), and ensure the audio element is created and used reliably across route changes via the existing `BackgroundAudioProvider` integration in `frontend/src/App.tsx`.",
-      "files": [
-        "frontend/src/components/BackgroundAudioProvider.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-7"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-keep-project-storage-usage-safe-by-avoiding-duplicate-audio-copies-include-only-one-background-music-file-in-frontend-public-assets-for-runtime-use-and-remove-avoid-adding-multiple-variants-of-the-same-track",
-      "featureTitle": "Keep project storage usage safe by avoiding duplicate audio copies: include only one background music file in `frontend/public/assets/` for runtime use and remove/avoid adding multiple variants of the same track.",
-      "files": [],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-8"
+        "REQ-3"
       ],
       "confidence": "high"
     }
