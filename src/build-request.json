@@ -1,128 +1,78 @@
 {
   "kind": "build_request",
-  "title": "Apply confirmed Page 1/2 styling updates, swap Page 1 background, and re-enable background music",
-  "priority": "high",
+  "title": "Apply Page 1 color updates (wine heading, unicorn silver body, thyme CTA button)",
+  "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Update Page 1 (IntroPage) typography and placement: keep the title in the same horizontal position, make the title larger, and move it slightly downward; also increase the paragraph font size. Keep Page 1 title color as wine and paragraph color as unicorn silver.",
+      "text": "Update Page 1 (IntroPage) heading text color to exactly #722F37 (wine) using a Tailwind arbitrary color class or equivalent so it renders with that exact hex value.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-8",
+          "msg-10"
         ],
         "quotes": [
-          "Page 1 tittle Not higher or left just let it where it is And make it little big and place little downside"
+          "1. 722F37",
+          "Apply the changes now"
         ]
       },
       "acceptanceCriteria": [
-        "On Page 1, the title is visibly larger than before and sits slightly lower than its previous position, without shifting left/right.",
-        "On Page 1, the paragraph font size is increased compared to the current deployed version.",
-        "Page 1 title uses the wine color token and the paragraph uses the unicorn silver color token."
+        "On the Intro page, the main heading renders in hex color #722F37.",
+        "The change is visible in the browser and is not dependent on existing theme tokens such as `text-wine`."
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Replace the Page 1 background image with the newly uploaded image by updating the app to reference the generated background asset for Page 1 (and ensure the image is served from the frontend static assets path).",
+      "text": "Update Page 1 (IntroPage) body paragraph text color to exactly #E8E8E8 (unicorn silver) using a Tailwind arbitrary color class or equivalent so it renders with that exact hex value.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-8",
+          "msg-10"
         ],
         "quotes": [
-          "And replace page 1 backround image with this new image"
+          "2. E8E8E8",
+          "Apply the changes now"
         ]
       },
       "acceptanceCriteria": [
-        "Page 1 displays the new background image instead of the current one.",
-        "Background rendering rules remain unchanged: centered, no-repeat, contain/letterbox, with the black translucent overlay above the image and behind content."
+        "On the Intro page, the main paragraph renders in hex color #E8E8E8.",
+        "The paragraph remains readable against the background and the color change is visible in the browser."
       ]
     },
     {
       "id": "REQ-3",
-      "text": "Change the Page 1 navigation CTA (the control that takes the user from Page 1 to Page 2) to use the Kaitoke color.",
+      "text": "Update the Page 1 call-to-action element that navigates to the next page (the clickable CTA box on IntroPage) so its background color uses exactly #669966 (thyme), preserving the existing alpha/opacity behavior.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-8",
+          "msg-10"
         ],
         "quotes": [
-          "And in page 1 the button which used to go on page 2 make it in kaitoke colour"
+          "3. 669966",
+          "Apply the changes now"
         ]
       },
       "acceptanceCriteria": [
-        "The Page 1 CTA that navigates to '/proposal' renders with a Kaitoke-colored background (or primary accent) in its default state.",
-        "The CTA remains clearly readable against its background after the color change."
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "text": "Set the Page 2 proposal question line color to Barbie Pink.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "Page 2 proposal line color = Barbie Pink"
-        ]
-      },
-      "acceptanceCriteria": [
-        "On Page 2, the 'Will you marry me ?' heading renders in Barbie Pink."
-      ]
-    },
-    {
-      "id": "REQ-5",
-      "text": "Add background music playback for a track named \"Soch_Na_Sake...\" that loops continuously, has no visible controls, and continues playing uninterrupted across navigation from Page 1 → Page 2 → Page 3. Ensure playback starts only after a user interaction (use the existing EnterWebsiteGate interaction) to satisfy browser autoplay restrictions.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "And add a background music \"Soch_Na_Sake..."
-        ]
-      },
-      "acceptanceCriteria": [
-        "After the user completes the EnterWebsiteGate interaction, the background music starts and loops.",
-        "Navigating between routes ('/', '/proposal', '/final') does not stop or restart the audio (no audible interruption).",
-        "No audio controls are visible in the UI."
-      ]
-    },
-    {
-      "id": "REQ-6",
-      "text": "Address the reported issue that a successful deploy showed no visible changes by ensuring the updated assets and styling are actually the ones referenced at runtime (e.g., update static asset paths used by the pages so they point to the replaced/generated files, and remove any stale references).",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "But nothing changed",
-          "everything looks untouched"
-        ]
-      },
-      "acceptanceCriteria": [
-        "After rebuild, Page 1 background, Page 1 CTA color, Page 1 title/paragraph sizing/placement, and Page 2 heading color all reflect the requested changes in the live preview.",
-        "No page continues to reference the old Page 1 background path once the replacement is applied."
+        "On the Intro page, the clickable CTA box (that navigates to the proposal page) has a background color based on hex #669966.",
+        "The CTA box still navigates to the next page when clicked.",
+        "Hover/transition behavior remains present after the color update."
       ]
     }
   ],
   "constraints": [
-    "Do not edit any files under frontend/src/components/ui (read-only).",
-    "Do not edit immutable paths: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx.",
-    "Keep the backend as-is (backend/main.mo remains a single empty actor unless a new backend requirement is explicitly needed).",
-    "All user-facing text in the app must remain in English only where new user-facing text is introduced by these changes."
+    "Do not edit files under frontend/src/components/ui (read-only).",
+    "Do not edit immutable hook/bootstrap files: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx."
   ],
   "nonGoals": [
-    "Adding new pages or changing the existing 3-route structure.",
-    "Changing the letterbox/contain background behavior or removing the black overlay.",
-    "Adding third-party audio streaming or external integrations; audio must be a bundled static asset."
+    "No backend (Motoko) changes.",
+    "No changes to Page 2/ProposalPage button styling unless required to satisfy the Page 1 CTA color request.",
+    "No text/content copy edits (only color changes requested)."
   ],
   "imageRequirements": {
-    "required": [
-      "Page 1 full-screen background image (bg-page-1.dim_1920x1080.png)"
-    ],
+    "required": [],
     "edits": []
   },
   "userProfileUpdate": {

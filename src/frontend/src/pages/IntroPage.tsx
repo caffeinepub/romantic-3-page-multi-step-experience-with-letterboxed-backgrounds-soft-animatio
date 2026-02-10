@@ -26,14 +26,14 @@ export default function IntroPage() {
         <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 py-12">
           {/* Title - upper-middle */}
           <div className="absolute top-[20%] w-full text-center">
-            <h1 className="animate-fade-in font-david text-5xl text-wine md:text-6xl lg:text-7xl">
+            <h1 className="animate-fade-in font-david text-5xl text-[#722F37] md:text-6xl lg:text-7xl">
               Nitia...
             </h1>
           </div>
 
           {/* Paragraph - centered middle */}
           <div className="max-w-3xl text-center">
-            <p className="animate-fade-in font-emily text-lg leading-relaxed text-unicorn-silver md:text-xl lg:text-2xl">
+            <p className="animate-fade-in font-emily text-lg leading-relaxed text-[#E8E8E8] md:text-xl lg:text-2xl">
               Baby genuinely thank you soo much meri life me aane ke liye aur usse itna acha banane ke
               liye ye toh bass choti si cheez hai aap ke liye bahut kuch kar sakta hun mei meri jaan I
               love you sooo much hope so aap ko pasand aayega mwahh 😘
@@ -44,10 +44,10 @@ export default function IntroPage() {
           {showCTA && (
             <div
               onClick={handleCTAClick}
-              className="animate-delayed-fade-in fixed bottom-8 right-8 cursor-pointer rounded-lg bg-black/60 p-4 backdrop-blur-sm transition-transform hover:scale-105 md:p-6"
+              className="animate-delayed-fade-in fixed bottom-8 right-8 cursor-pointer rounded-lg bg-[#669966]/80 p-4 backdrop-blur-sm transition-transform hover:scale-105 md:p-6"
               style={{ maxWidth: '200px' }}
             >
-              <p className="animate-shine-blink font-times text-xs text-honey-gold md:text-sm">
+              <p className="animate-shine-blink font-times text-xs text-unicorn-silver md:text-sm">
                 nitiaa baby ab apne pyaare haatho se next page ko open kar lo✨
               </p>
             </div>

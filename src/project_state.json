@@ -1,20 +1,36 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "Two-page proposal site updates: apply specific Page 1 typography/color/layout changes, swap Page 1 background image, add background music, adjust Page 1 navigation button color, and set Page 2 proposal line color.",
-  "architectural_notes": [],
+  "summary": "New project",
+  "architectural_notes": [
+    "Page 1 color specs: heading wine #722F37, body paragraph unicorn silver #E8E8E8, next-page button tyme #669966"
+  ],
   "known_issues": [
-    "Build/deploy reported successful but latest changes did not apply (everything looks untouched)",
-    "System configuration error occurred during build/deploy"
+    "User reports Page colors were not changing as expected; needs applying specified Page 1 color updates."
   ],
   "isFixRequest": true,
-  "imageRequirements": "## Required Images\n- Page 1 full-screen background image (bg-page-1.dim_1920x1080.png)",
   "existing_features": [
     {
-      "id": "feature-replace-the-page-1-background-image-with-the-newly-uploaded-image-by-updating-the-app-to-reference-the-generated-background-asset-for-page-1-and-ensure-the-image-is-served-from-the-frontend-static-assets-path",
-      "title": "Replace the Page 1 background image with the newly uploaded image by updating the app to reference the generated background asset for Page 1 (and ensure the image is served from the frontend static assets path).",
+      "id": "feature-update-page-1-intropage-heading-text-color-to-exactly-722f37-wine-using-a-tailwind-arbitrary-color-class-or-equivalent-so-it-renders-with-that-exact-hex-value",
+      "title": "Update Page 1 (IntroPage) heading text color to exactly #722F37 (wine) using a Tailwind arbitrary color class or equivalent so it renders with that exact hex value.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-page-1-intropage-body-paragraph-text-color-to-exactly-e8e8e8-unicorn-silver-using-a-tailwind-arbitrary-color-class-or-equivalent-so-it-renders-with-that-exact-hex-value",
+      "title": "Update Page 1 (IntroPage) body paragraph text color to exactly #E8E8E8 (unicorn silver) using a Tailwind arbitrary color class or equivalent so it renders with that exact hex value.",
       "reqIds": [
         "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-page-1-call-to-action-element-that-navigates-to-the-next-page-the-clickable-cta-box-on-intropage-so-its-background-color-uses-exactly-669966-thyme-preserving-the-existing-alpha-opacity-behavior",
+      "title": "Update the Page 1 call-to-action element that navigates to the next page (the clickable CTA box on IntroPage) so its background color uses exactly #669966 (thyme), preserving the existing alpha/opacity behavior.",
+      "reqIds": [
+        "REQ-3"
       ],
       "version": 1
     }
@@ -22,82 +38,12 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Page 1: set title color to wine and paragraph color to unicorn silver",
+      "summary": "Update Page 1 UI colors: heading #722F37, body paragraph text #E8E8E8, next-page button #669966",
       "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-2",
-      "summary": "Page 1: increase title and paragraph font sizes; move title slightly downward (not left/higher)",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-3",
-      "summary": "Replace Page 1 background image with newly uploaded image",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-4",
-      "summary": "Add background music track \"Soch_Na_Sake...\"",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-5",
-      "summary": "Page 1: change button (to Page 2) color to Kaitoke",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-6",
-      "summary": "Page 2: change proposal line color to Barbie Pink",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-7",
-      "summary": "Update Page 1 (IntroPage) typography and placement: keep the title in the same horizontal position, make the title larger, and move it slightly downward; also increase the paragraph font size. Keep Page 1 title color as wine and paragraph color as unicorn silver.",
-      "reqIds": [
-        "REQ-1"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-9",
-      "summary": "Change the Page 1 navigation CTA (the control that takes the user from Page 1 to Page 2) to use the Kaitoke color.",
-      "reqIds": [
-        "REQ-3"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-10",
-      "summary": "Set the Page 2 proposal question line color to Barbie Pink.",
-      "reqIds": [
-        "REQ-4"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-11",
-      "summary": "Add background music playback for a track named \"Soch_Na_Sake...\" that loops continuously, has no visible controls, and continues playing uninterrupted across navigation from Page 1 → Page 2 → Page 3. Ensure playback starts only after a user interaction (use the existing EnterWebsiteGate interaction) to satisfy browser autoplay restrictions.",
-      "reqIds": [
-        "REQ-5"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-12",
-      "summary": "Address the reported issue that a successful deploy showed no visible changes by ensuring the updated assets and styling are actually the ones referenced at runtime (e.g., update static asset paths used by the pages so they point to the replaced/generated files, and remove any stale references).",
-      "reqIds": [
-        "REQ-6"
-      ],
       "status": "pending"
     }
   ],
-  "projectName": "Apply confirmed Page 1/2 styling updates, swap Page 1 background, and re-enable background music",
+  "projectName": "Apply Page 1 color updates (wine heading, unicorn silver body, thyme CTA button)",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

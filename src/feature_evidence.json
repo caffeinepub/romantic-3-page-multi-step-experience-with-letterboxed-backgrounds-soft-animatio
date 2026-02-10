@@ -2,9 +2,29 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-replace-the-page-1-background-image-with-the-newly-uploaded-image-by-updating-the-app-to-reference-the-generated-background-asset-for-page-1-and-ensure-the-image-is-served-from-the-frontend-static-assets-path",
-      "featureTitle": "Replace the Page 1 background image with the newly uploaded image by updating the app to reference the generated background asset for Page 1 (and ensure the image is served from the frontend static assets path).",
-      "files": [],
+      "featureId": "feature-update-page-1-intropage-heading-text-color-to-exactly-722f37-wine-using-a-tailwind-arbitrary-color-class-or-equivalent-so-it-renders-with-that-exact-hex-value",
+      "featureTitle": "Update Page 1 (IntroPage) heading text color to exactly #722F37 (wine) using a Tailwind arbitrary color class or equivalent so it renders with that exact hex value.",
+      "files": [
+        "frontend/src/pages/IntroPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-page-1-intropage-body-paragraph-text-color-to-exactly-e8e8e8-unicorn-silver-using-a-tailwind-arbitrary-color-class-or-equivalent-so-it-renders-with-that-exact-hex-value",
+      "featureTitle": "Update Page 1 (IntroPage) body paragraph text color to exactly #E8E8E8 (unicorn silver) using a Tailwind arbitrary color class or equivalent so it renders with that exact hex value.",
+      "files": [
+        "frontend/src/pages/IntroPage.tsx"
+      ],
       "components": [
         "core-infrastructure@1.0.2",
         "shadcn-ui@1.0.0",
@@ -14,6 +34,24 @@
       ],
       "testIds": [
         "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-the-page-1-call-to-action-element-that-navigates-to-the-next-page-the-clickable-cta-box-on-intropage-so-its-background-color-uses-exactly-669966-thyme-preserving-the-existing-alpha-opacity-behavior",
+      "featureTitle": "Update the Page 1 call-to-action element that navigates to the next page (the clickable CTA box on IntroPage) so its background color uses exactly #669966 (thyme), preserving the existing alpha/opacity behavior.",
+      "files": [
+        "frontend/src/pages/IntroPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
       ],
       "confidence": "high"
     }

@@ -1,86 +1,56 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-10T02:35:24.194Z",
+  "generatedAt": "2026-02-10T05:06:22.245Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 6,
-    "implemented": 1,
+    "total": 3,
+    "implemented": 3,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Update Page 1 (IntroPage) typography and placement: keep the title in the same horizontal position, make the title larger, and move it slightly downward; also increase the paragraph font size. Keep Page 1 title color as wine and paragraph color as unicorn silver.",
-        "status": "missing",
+        "summary": "Update Page 1 (IntroPage) heading text color to exactly #722F37 (wine) using a Tailwind arbitrary color class or equivalent so it renders with that exact hex value.",
+        "status": "implemented",
         "plannedFiles": [
           "frontend/src/pages/IntroPage.tsx"
         ],
-        "matchedFiles": []
+        "matchedFiles": [
+          "frontend/src/pages/IntroPage.tsx"
+        ]
       },
       {
         "id": "REQ-2",
-        "summary": "Replace the Page 1 background image with the newly uploaded image by updating the app to reference the generated background asset for Page 1 (and ensure the image is served from the frontend static assets path).",
+        "summary": "Update Page 1 (IntroPage) body paragraph text color to exactly #E8E8E8 (unicorn silver) using a Tailwind arbitrary color class or equivalent so it renders with that exact hex value.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/public/assets/generated/bg-page-1.dim_1920x1080.png",
-          "frontend/src/assets/staticAssets.ts"
+          "frontend/src/pages/IntroPage.tsx"
         ],
         "matchedFiles": [
-          "frontend/public/assets/generated/bg-page-1.dim_1920x1080.png"
+          "frontend/src/pages/IntroPage.tsx"
         ]
       },
       {
         "id": "REQ-3",
-        "summary": "Change the Page 1 navigation CTA (the control that takes the user from Page 1 to Page 2) to use the Kaitoke color.",
-        "status": "missing",
+        "summary": "Update the Page 1 call-to-action element that navigates to the next page (the clickable CTA box on IntroPage) so its background color uses exactly #669966 (thyme), preserving the existing alpha/opacity behavior.",
+        "status": "implemented",
         "plannedFiles": [
           "frontend/src/pages/IntroPage.tsx"
         ],
-        "matchedFiles": []
-      },
-      {
-        "id": "REQ-4",
-        "summary": "Set the Page 2 proposal question line color to Barbie Pink.",
-        "status": "missing",
-        "plannedFiles": [
-          "frontend/src/index.css",
-          "frontend/tailwind.config.js",
-          "frontend/src/pages/ProposalPage.tsx"
-        ],
-        "matchedFiles": []
-      },
-      {
-        "id": "REQ-5",
-        "summary": "Add background music playback for a track named \"Soch_Na_Sake...\" that loops continuously, has no visible controls, and continues playing uninterrupted across navigation from Page 1 → Page 2 → Page 3. Ensure playback starts only after a user interaction (use the existing EnterWebsiteGate interaction) to satisfy browser autoplay restrictions.",
-        "status": "missing",
-        "plannedFiles": [
-          "frontend/public/assets/generated/Soch_Na_Sake.mp3",
-          "frontend/src/components/BackgroundAudioProvider.tsx",
-          "frontend/src/components/RootLayout.tsx",
-          "frontend/src/components/EnterWebsiteGate.tsx",
+        "matchedFiles": [
           "frontend/src/pages/IntroPage.tsx"
-        ],
-        "matchedFiles": []
-      },
-      {
-        "id": "REQ-6",
-        "summary": "Address the reported issue that a successful deploy showed no visible changes by ensuring the updated assets and styling are actually the ones referenced at runtime (e.g., update static asset paths used by the pages so they point to the replaced/generated files, and remove any stale references).",
-        "status": "missing",
-        "plannedFiles": [
-          "frontend/src/assets/staticAssets.ts",
-          "frontend/public/assets/InsMix_20260209_211147926.jpg"
-        ],
-        "matchedFiles": []
+        ]
       }
     ]
   },
   "changedFiles": [
     "build-request.json",
     "feature_evidence.json",
+    "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/public/assets/generated/bg-page-1.dim_1920x1080.png",
+    "frontend/src/pages/IntroPage.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

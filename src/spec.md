@@ -1,14 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Apply the confirmed styling updates to Page 1 and Page 2, swap Page 1’s background image, and re-enable looping background music that persists across all three routes.
+**Goal:** Update Page 1 (IntroPage) colors to specific hex values for the heading, body text, and CTA background.
 
 **Planned changes:**
-- Update Page 1 (IntroPage) title typography and placement: keep its horizontal position, make it larger, and move it slightly downward; increase the paragraph font size; keep title color as wine and paragraph color as unicorn silver.
-- Replace the Page 1 background image to use the provided generated asset and ensure it is referenced via the correct frontend static asset path while keeping existing background rendering rules (centered, no-repeat, contain/letterbox, black translucent overlay).
-- Change the Page 1 navigation CTA (to “/proposal”) styling to use the Kaitoke color while maintaining readable contrast.
-- Update Page 2 proposal question (“Will you marry me ?”) line color to Barbie Pink.
-- Add bundled background music (“Soch_Na_Sake...”) that starts only after the EnterWebsiteGate interaction, loops continuously, has no visible controls, and continues uninterrupted across navigation between “/”, “/proposal”, and “/final”.
-- Ensure updated assets and styles are the ones actually referenced at runtime so the live build reflects the requested changes (remove/replace stale asset references).
+- Change the IntroPage main heading text color to exactly `#722F37` (wine) using a Tailwind arbitrary color (or equivalent).
+- Change the IntroPage main body paragraph text color to exactly `#E8E8E8` (unicorn silver) using a Tailwind arbitrary color (or equivalent).
+- Update the IntroPage clickable CTA box background color to be based on exactly `#669966` (thyme), while preserving existing opacity/alpha behavior and existing hover/transition behavior.
 
-**User-visible outcome:** Page 1 shows the new background and updated title/paragraph styling with a Kaitoke-colored CTA to Page 2; Page 2 shows the proposal heading in Barbie Pink; after the entry interaction, background music plays and loops continuously without controls and without stopping when moving through Page 1 → Page 2 → Page 3.
+**User-visible outcome:** On Page 1, the heading and paragraph display in the requested exact colors, and the CTA box shows the updated thyme-based background color while still behaving the same (hover/transition) and navigating to the next page when clicked.

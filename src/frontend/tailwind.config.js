@@ -9,6 +9,7 @@ export default {
         'unicorn-silver': 'oklch(var(--unicorn-silver) / <alpha-value>)',
         'honey-gold': 'oklch(var(--honey-gold) / <alpha-value>)',
         kaitoke: 'oklch(var(--kaitoke) / <alpha-value>)',
+        thyme: 'oklch(var(--thyme) / <alpha-value>)',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
