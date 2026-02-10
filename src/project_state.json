@@ -1,179 +1,20 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 11,
-  "summary": "Romantic multi-step website experience with letterboxed full-screen backgrounds, black overlay, consistent typography/colors, soft animations, and a Valentine/love-themed “Enter the Website” intro screen (restyled with love colors + heart animations) before Page 1; Page 2 YES button slightly smaller; Page 3 text and signature set to pure white for readability (shimmer removed). Background music is currently omitted from rebuild due to missing/undetected audio upload and repeated build configuration errors.",
-  "architectural_notes": [
-    "Background images must use CSS object-fit/background-size: contain (letterbox) to avoid cropping; center; no-repeat; add black translucent overlay layer for readability.",
-    "Audio must persist across navigation (e.g., shared layout/single-page app routing or persistent audio element) with autoplay+loop and no visible controls.",
-    "Add a pre-Page-1 intro/landing screen; ensure background audio autoplay is initiated after the user clicks “Enter the Website” to satisfy browser autoplay restrictions while keeping audio persistent across subsequent navigation.",
-    "When music is re-enabled: attempt autoplay on initial visit, but fall back to starting playback on the first user interaction (Enter button) if autoplay is blocked.",
-    "If the audio asset is missing/undetected in the build system, proceed with a no-music build to ensure successful deployment."
-  ],
+  "projectStateVersion": 3,
+  "summary": "Two-page proposal site updates: apply specific Page 1 typography/color/layout changes, swap Page 1 background image, add background music, adjust Page 1 navigation button color, and set Page 2 proposal line color.",
+  "architectural_notes": [],
   "known_issues": [
-    "Deployed site/preview not loading (white/grey screen) even in new tab/live link on mobile; user suspects code issue.",
-    "Production deployment failed with generic \"Deployment error\" during Version 2 deploy.",
-    "Build pipeline repeatedly fails with a \"Configuration error\" during rebuild attempts.",
-    "Uploaded audio file is not detected/available in the build system despite user indicating it was uploaded; only images are visible."
+    "Build/deploy reported successful but latest changes did not apply (everything looks untouched)",
+    "System configuration error occurred during build/deploy"
   ],
-  "isFixRequest": false,
+  "isFixRequest": true,
+  "imageRequirements": "## Required Images\n- Page 1 full-screen background image (bg-page-1.dim_1920x1080.png)",
   "existing_features": [
     {
-      "id": "feature-create-a-3-page-frontend-flow-with-navigation-page-1-intro-page-2-proposal-page-3-final-use-three-distinct-routes-or-an-equivalent-multi-page-structure-so-each-page-has-its-own-background-image-and-layout",
-      "title": "Create a 3-page frontend flow with navigation: Page 1 (Intro) → Page 2 (Proposal) → Page 3 (Final). Use three distinct routes (or an equivalent multi-page structure) so each page has its own background image and layout.",
-      "reqIds": [
-        "REQ-1"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-implement-per-page-full-screen-background-rendering-using-three-uploaded-images-with-these-rules-on-all-pages-background-is-never-cropped-use-contain-letterbox-behavior-centered-no-repeat-and-a-black-transparent-overlay-above-the-image-but-behind-all-text-ui",
-      "title": "Implement per-page full-screen background rendering using three uploaded images, with these rules on all pages: background is never cropped; use contain/letterbox behavior; centered; no-repeat; and a black transparent overlay above the image but behind all text/UI.",
+      "id": "feature-replace-the-page-1-background-image-with-the-newly-uploaded-image-by-updating-the-app-to-reference-the-generated-background-asset-for-page-1-and-ensure-the-image-is-served-from-the-frontend-static-assets-path",
+      "title": "Replace the Page 1 background image with the newly uploaded image by updating the app to reference the generated background asset for Page 1 (and ensure the image is served from the frontend static assets path).",
       "reqIds": [
         "REQ-2"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-a-single-uploaded-audio-file-as-hidden-background-music-that-autoplays-when-the-site-loads-loops-continuously-has-no-visible-controls-and-continues-playing-uninterrupted-across-navigation-from-page-1-through-page-3",
-      "title": "Add a single uploaded audio file as hidden background music that autoplays when the site loads, loops continuously, has no visible controls, and continues playing uninterrupted across navigation from Page 1 through Page 3.",
-      "reqIds": [
-        "REQ-3"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-implement-the-specified-typography-system-and-color-palette-across-all-pages-title-font-david-body-font-emily-cta-font-high-tower-or-times-new-roman-depending-on-the-page-heading-color-wine-paragraph-color-unicorn-silver-cta-color-honey-gold-page-3-paragraph-and-signature-color-kaitoke-dark-green-ensure-consistent-gentle-romantic-styling-and-airy-spacing",
-      "title": "Implement the specified typography system and color palette across all pages: title font = David; body font = Emily; CTA font = High Tower or Times New Roman depending on the page; heading color = wine; paragraph color = unicorn silver; CTA color = honey-gold; Page 3 paragraph and signature color = Kaitoke (dark green). Ensure consistent, gentle romantic styling and airy spacing.",
-      "reqIds": [
-        "REQ-4"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-build-page-1-layout-and-behaviors-full-screen-background-overlay-title-text-nitia-in-upper-middle-centered-centered-paragraph-text-in-the-middle-with-the-provided-content-both-title-and-paragraph-fade-in-on-page-load-a-bottom-right-square-cta-box-with-translucent-black-background-that-appears-after-a-10-second-delay-via-a-delayed-fade-in-contains-the-provided-cta-sentence-uses-times-new-roman-in-honey-gold-at-one-third-of-the-normal-cta-size-and-has-a-shine-effect-plus-blinking-every-2-seconds-clicking-the-cta-navigates-to-page-2",
-      "title": "Build Page 1 layout and behaviors: full-screen background + overlay; title text \"Nitia...\" in upper-middle, centered; centered paragraph text in the middle with the provided content; both title and paragraph fade in on page load; a bottom-right square CTA box with translucent black background that appears after a 10-second delay via a delayed fade-in, contains the provided CTA sentence, uses Times New Roman in honey-gold at one-third of the normal CTA size, and has a shine effect plus blinking every 2 seconds; clicking the CTA navigates to Page 2.",
-      "reqIds": [
-        "REQ-5"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-build-page-2-layout-and-behaviors-full-screen-background-overlay-centered-text-will-you-marry-me-in-wine-color-using-the-emily-font-with-a-fade-in-animation-a-romantic-themed-yes-button-below-the-text-lower-middle-clicking-yes-navigates-to-page-3",
-      "title": "Build Page 2 layout and behaviors: full-screen background + overlay; centered text \"Will you marry me ?\" in wine color using the Emily font with a fade-in animation; a romantic-themed YES button below the text (lower-middle); clicking YES navigates to Page 3.",
-      "reqIds": [
-        "REQ-6"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-build-page-3-layout-and-behaviors-full-screen-background-overlay-display-the-provided-long-message-as-scrollable-content-allow-vertical-scrolling-while-preserving-line-breaks-exactly-ensure-the-text-is-readable-over-the-overlay-place-the-signature-your-arsu-at-the-bottom-right-signature-uses-high-tower-font-and-kaitoke-dark-green-color-keep-placement-visually-balanced-and-readable",
-      "title": "Build Page 3 layout and behaviors: full-screen background + overlay; display the provided long message as scrollable content (allow vertical scrolling) while preserving line breaks exactly; ensure the text is readable over the overlay; place the signature \"- YOUR ARSU\" at the bottom-right; signature uses High Tower font and Kaitoke (dark green) color; keep placement visually balanced and readable.",
-      "reqIds": [
-        "REQ-7"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-soft-fade-in-animations-for-the-main-text-on-all-pages-and-implement-the-page-1-cta-animations-delayed-fade-in-shine-blink-using-css-tailwind-friendly-animations-without-adding-visible-debug-ui",
-      "title": "Add soft fade-in animations for the main text on all pages, and implement the Page 1 CTA animations (delayed fade-in, shine, blink) using CSS/Tailwind-friendly animations without adding visible debug UI.",
-      "reqIds": [
-        "REQ-8"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-a-clear-asset-integration-approach-so-the-user-can-upload-replace-exactly-3-background-images-one-per-page-and-1-audio-file-without-code-changes-beyond-swapping-the-files-at-the-expected-paths-filenames",
-      "title": "Add a clear asset integration approach so the user can upload/replace exactly 3 background images (one per page) and 1 audio file without code changes beyond swapping the files at the expected paths/filenames.",
-      "reqIds": [
-        "REQ-9"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-replace-the-app-s-three-page-background-assets-with-the-user-uploaded-images-by-copying-renaming-them-into-the-expected-static-asset-filenames-so-they-render-as-the-page-1-2-3-full-screen-letterboxed-backgrounds-asset-mapping-to-apply-page-1-background-insmix-20260209-211147926-jpg-frontend-public-assets-generated-bg-page-1-dim-1920x1080-png-page-2-background-floral-dress-collage-insmix-20260209-231320300-jpg-frontend-public-assets-generated-bg-page-2-dim-1920x1080-png-page-3-background-insmix-20260209-231554807-jpg-frontend-public-assets-generated-bg-page-3-dim-1920x1080-png-keep-the-existing-background-rendering-rules-contain-letterbox-centered-no-repeat-with-black-translucent-overlay-unchanged",
-      "title": "Replace the app’s three page background assets with the user-uploaded images by copying/renaming them into the expected static asset filenames so they render as the Page 1/2/3 full-screen letterboxed backgrounds.\n\nAsset mapping to apply:\n- Page 1 background: InsMix_20260209_211147926.jpg -> frontend/public/assets/generated/bg-page-1.dim_1920x1080.png\n- Page 2 background (floral dress collage): InsMix_20260209_231320300.jpg -> frontend/public/assets/generated/bg-page-2.dim_1920x1080.png\n- Page 3 background: InsMix_20260209_231554807.jpg -> frontend/public/assets/generated/bg-page-3.dim_1920x1080.png\n\nKeep the existing background rendering rules (contain/letterbox, centered, no-repeat, with black translucent overlay) unchanged.",
-      "reqIds": [
-        "REQ-10"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-install-the-user-uploaded-audio-file-as-the-site-s-background-music-by-placing-it-at-frontend-public-assets-generated-background-music-mp3-keeping-that-exact-filename-so-it-attempts-to-autoplay-on-site-visit-loops-continuously-has-no-visible-controls-and-continues-playing-uninterrupted-across-navigation-between-pages",
-      "title": "Install the user-uploaded audio file as the site’s background music by placing it at frontend/public/assets/generated/background-music.mp3 (keeping that exact filename), so it attempts to autoplay on site visit, loops continuously, has no visible controls, and continues playing uninterrupted across navigation between pages.",
-      "reqIds": [
-        "REQ-11"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-fix-the-tanstack-router-setup-so-the-app-renders-reliably-no-white-blank-screen-on-mobile-and-desktop-by-removing-the-incorrect-nested-routerprovider-usage-and-ensuring-the-root-route-renders-children-via-an-outlet-based-layout",
-      "title": "Fix the TanStack Router setup so the app renders reliably (no white/blank screen) on mobile and desktop by removing the incorrect nested RouterProvider usage and ensuring the root route renders children via an Outlet-based layout.",
-      "reqIds": [
-        "REQ-12"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-a-valentine-love-themed-enter-the-website-landing-screen-that-appears-before-page-1-and-requires-a-user-click-tap-to-enter-the-existing-3-page-flow-while-keeping-the-rest-of-the-experience-unchanged",
-      "title": "Add a Valentine/love-themed “Enter the Website” landing screen that appears before Page 1 and requires a user click/tap to enter the existing 3-page flow, while keeping the rest of the experience unchanged.",
-      "reqIds": [
-        "REQ-13"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-ensure-background-music-still-exists-as-a-hidden-looping-track-and-persists-across-navigation-but-make-its-startup-non-blocking-and-compatible-with-mobile-autoplay-restrictions-by-starting-playback-on-the-first-user-interaction-the-enter-the-website-click-tap-qualifies-and-ensuring-failures-do-not-prevent-the-ui-from-rendering",
-      "title": "Ensure background music still exists as a hidden looping track and persists across navigation, but make its startup non-blocking and compatible with mobile autoplay restrictions by starting playback on the first user interaction (the “Enter the Website” click/tap qualifies) and ensuring failures do not prevent the UI from rendering.",
-      "reqIds": [
-        "REQ-14"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-a-production-safe-client-side-error-boundary-fallback-ui-so-that-any-unexpected-runtime-error-shows-a-minimal-readable-error-screen-instead-of-a-blank-page-and-logs-the-error-to-the-browser-console-for-debugging",
-      "title": "Add a production-safe client-side error boundary/fallback UI so that any unexpected runtime error shows a minimal readable error screen (instead of a blank page) and logs the error to the browser console for debugging.",
-      "reqIds": [
-        "REQ-15"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-remove-disable-the-background-music-feature-entirely-so-the-app-builds-and-runs-without-requiring-any-audio-file-while-keeping-the-rest-of-the-3-page-experience-unchanged-including-the-enter-the-website-gate-screen-this-includes-removing-the-music-startup-call-from-the-enterwebsitegate-and-removing-the-backgroundaudioprovider-wiring-so-no-audio-is-initialized-played",
-      "title": "Remove/disable the background music feature entirely so the app builds and runs without requiring any audio file, while keeping the rest of the 3-page experience unchanged (including the “Enter the Website” gate screen). This includes removing the music startup call from the EnterWebsiteGate and removing the BackgroundAudioProvider wiring so no audio is initialized/played.",
-      "reqIds": [
-        "REQ-16"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-update-the-asset-replacement-documentation-frontend-readme-assets-md-to-reflect-that-background-music-is-intentionally-disabled-removed-for-this-rebuild-and-that-only-the-three-background-images-need-to-be-replaced-to-customize-the-site",
-      "title": "Update the asset replacement documentation (frontend/README-assets.md) to reflect that background music is intentionally disabled/removed for this rebuild and that only the three background images need to be replaced to customize the site.",
-      "reqIds": [
-        "REQ-18"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-update-page-3-final-page-so-the-long-message-text-and-the-signature-are-pure-white-and-easy-to-read-remove-the-shimmer-shine-animation-from-the-message-keep-the-existing-fonts-and-ensure-the-signature-uses-the-same-font-as-before-but-is-also-pure-white",
-      "title": "Update Page 3 (Final page) so the long message text and the signature are pure white and easy to read: remove the shimmer/shine animation from the message, keep the existing fonts, and ensure the signature uses the same font as before but is also pure white.",
-      "reqIds": [
-        "REQ-19"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-make-the-page-2-yes-button-slightly-smaller-while-keeping-the-existing-romantic-styling-same-colors-rounded-shape-hover-behavior-and-general-look",
-      "title": "Make the Page 2 “YES” button slightly smaller while keeping the existing romantic styling (same colors, rounded shape, hover behavior, and general look).",
-      "reqIds": [
-        "REQ-20"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-restyle-the-pre-page-1-enter-the-website-gate-screen-to-feel-more-love-valentine-themed-using-love-colors-and-animated-hearts-while-keeping-the-same-gate-behavior-user-must-click-tap-to-enter-the-site",
-      "title": "Restyle the pre-Page-1 “Enter the Website” gate screen to feel more love/Valentine-themed using love colors and animated hearts, while keeping the same gate behavior (user must click/tap to enter the site).",
-      "reqIds": [
-        "REQ-21"
       ],
       "version": 1
     }
@@ -181,67 +22,82 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Build 3-page romantic site flow: Page 1 intro + CTA to Page 2, Page 2 proposal + YES button to Page 3, Page 3 final long message scrollable with signature",
+      "summary": "Page 1: set title color to wine and paragraph color to unicorn silver",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-2",
-      "summary": "Per-page full-screen background images displayed as contain/letterbox (never cropped), centered, no-repeat, with black transparent overlay on all pages",
+      "summary": "Page 1: increase title and paragraph font sizes; move title slightly downward (not left/higher)",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-3",
-      "summary": "Typography + color palette implementation: David/Emily/High Tower(or Times New Roman) with specified heading/paragraph/CTA colors incl Kaitoke dark green for Page 3 paragraph and signature",
+      "summary": "Replace Page 1 background image with newly uploaded image",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-4",
-      "summary": "Animations: fade-in main text on all pages; Page 1 CTA delayed (10s) fade-in; CTA text shine + blink every 2 seconds",
+      "summary": "Add background music track \"Soch_Na_Sake...\"",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-5",
-      "summary": "Background music: single uploaded audio file autoplay on load, loops continuously, hidden controls, continues playing across all 3 pages",
+      "summary": "Page 1: change button (to Page 2) color to Kaitoke",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-6",
-      "summary": "Add a Valentine/love-themed “Enter the Website” intro screen before Page 1 that the user clicks to enter the main 3-page flow",
+      "summary": "Page 2: change proposal line color to Barbie Pink",
       "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Update Page 1 (IntroPage) typography and placement: keep the title in the same horizontal position, make the title larger, and move it slightly downward; also increase the paragraph font size. Keep Page 1 title color as wine and paragraph color as unicorn silver.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Change the Page 1 navigation CTA (the control that takes the user from Page 1 to Page 2) to use the Kaitoke color.",
+      "reqIds": [
+        "REQ-3"
+      ],
       "status": "pending"
     },
     {
       "id": "AR-10",
-      "summary": "Restyle intro/landing screen with love-themed colors and heart animations (not just white text on black background) while keeping the Enter the Website gate behavior",
-      "reqIds": [],
+      "summary": "Set the Page 2 proposal question line color to Barbie Pink.",
+      "reqIds": [
+        "REQ-4"
+      ],
       "status": "pending"
     },
     {
       "id": "AR-11",
-      "summary": "Page 3 readability update: remove metallic shimmer entirely and set all Page 3 text + signature to pure white while keeping the same fonts",
-      "reqIds": [],
+      "summary": "Add background music playback for a track named \"Soch_Na_Sake...\" that loops continuously, has no visible controls, and continues playing uninterrupted across navigation from Page 1 → Page 2 → Page 3. Ensure playback starts only after a user interaction (use the existing EnterWebsiteGate interaction) to satisfy browser autoplay restrictions.",
+      "reqIds": [
+        "REQ-5"
+      ],
       "status": "pending"
     },
     {
       "id": "AR-12",
-      "summary": "Page 2 UI tweak: make the YES button a little smaller (keep existing styling otherwise)",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-13",
-      "summary": "Update background image asset mapping to use these uploaded images: Page 1 = InsMix_20260209_211147926; Page 2 = InsMix_20260209_231320300; Page 3 = InsMix_20260209_231554807 (copy/rename into expected static filenames used by the app)",
-      "reqIds": [],
+      "summary": "Address the reported issue that a successful deploy showed no visible changes by ensuring the updated assets and styling are actually the ones referenced at runtime (e.g., update static asset paths used by the pages so they point to the replaced/generated files, and remove any stale references).",
+      "reqIds": [
+        "REQ-6"
+      ],
       "status": "pending"
     }
   ],
-  "gameProjectType": "none",
-  "projectName": "Romantic 3-page multi-step experience with letterboxed backgrounds, soft animations, and continuous hidden music",
+  "projectName": "Apply confirmed Page 1/2 styling updates, swap Page 1 background, and re-enable background music",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

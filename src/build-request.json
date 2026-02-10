@@ -1,78 +1,138 @@
 {
   "kind": "build_request",
-  "title": "Restyle enter gate with heart animations, improve Final page readability, and reduce YES button size",
-  "priority": "normal",
+  "title": "Apply confirmed Page 1/2 styling updates, swap Page 1 background, and re-enable background music",
+  "priority": "high",
   "requirements": [
     {
-      "id": "REQ-19",
-      "text": "Update Page 3 (Final page) so the long message text and the signature are pure white and easy to read: remove the shimmer/shine animation from the message, keep the existing fonts, and ensure the signature uses the same font as before but is also pure white.",
+      "id": "REQ-1",
+      "text": "Update Page 1 (IntroPage) typography and placement: keep the title in the same horizontal position, make the title larger, and move it slightly downward; also increase the paragraph font size. Keep Page 1 title color as wine and paragraph color as unicorn silver.",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-1"
         ],
         "quotes": [
-          "All text pure white with same font along with signature",
-          "on page 3 those tax is not readable remove the shine and and make them just White and easy to read"
+          "Page 1 tittle Not higher or left just let it where it is And make it little big and place little downside"
         ]
       },
       "acceptanceCriteria": [
-        "On /final, the long message is rendered in solid white (no shimmer/metallic/shine animation).",
-        "On /final, the signature “- YOUR ARSU” is rendered in solid white and retains its existing font family styling.",
-        "Page 3 remains vertically scrollable and preserves existing line breaks (whitespace-pre-wrap behavior remains intact)."
+        "On Page 1, the title is visibly larger than before and sits slightly lower than its previous position, without shifting left/right.",
+        "On Page 1, the paragraph font size is increased compared to the current deployed version.",
+        "Page 1 title uses the wine color token and the paragraph uses the unicorn silver color token."
       ]
     },
     {
-      "id": "REQ-20",
-      "text": "Make the Page 2 “YES” button slightly smaller while keeping the existing romantic styling (same colors, rounded shape, hover behavior, and general look).",
+      "id": "REQ-2",
+      "text": "Replace the Page 1 background image with the newly uploaded image by updating the app to reference the generated background asset for Page 1 (and ensure the image is served from the frontend static assets path).",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-1"
         ],
         "quotes": [
-          "on page to make yes button little smaller"
+          "And replace page 1 backround image with this new image"
         ]
       },
       "acceptanceCriteria": [
-        "On /proposal, the YES button is visibly smaller than before (reduced padding and/or font size), while retaining the same styling and hover/transition behavior.",
-        "Clicking YES still navigates to /final."
+        "Page 1 displays the new background image instead of the current one.",
+        "Background rendering rules remain unchanged: centered, no-repeat, contain/letterbox, with the black translucent overlay above the image and behind content."
       ]
     },
     {
-      "id": "REQ-21",
-      "text": "Restyle the pre-Page-1 “Enter the Website” gate screen to feel more love/Valentine-themed using love colors and animated hearts, while keeping the same gate behavior (user must click/tap to enter the site).",
+      "id": "REQ-3",
+      "text": "Change the Page 1 navigation CTA (the control that takes the user from Page 1 to Page 2) to use the Kaitoke color.",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-1"
         ],
         "quotes": [
-          "Restyle with love colours and animation like heart",
-          "make intro in love them which is now just shows enter the website in white colour and Balck background"
+          "And in page 1 the button which used to go on page 2 make it in kaitoke colour"
         ]
       },
       "acceptanceCriteria": [
-        "Before entering the site, the gate screen shows a love-themed visual style (romantic/love colors) rather than a plain black/white appearance.",
-        "The gate screen includes heart-themed animation(s) visible on both desktop and mobile.",
-        "Clicking/tapping “Enter the Website” still dismisses the gate and reveals the existing 3-page flow unchanged."
+        "The Page 1 CTA that navigates to '/proposal' renders with a Kaitoke-colored background (or primary accent) in its default state.",
+        "The CTA remains clearly readable against its background after the color change."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Set the Page 2 proposal question line color to Barbie Pink.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Page 2 proposal line color = Barbie Pink"
+        ]
+      },
+      "acceptanceCriteria": [
+        "On Page 2, the 'Will you marry me ?' heading renders in Barbie Pink."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Add background music playback for a track named \"Soch_Na_Sake...\" that loops continuously, has no visible controls, and continues playing uninterrupted across navigation from Page 1 → Page 2 → Page 3. Ensure playback starts only after a user interaction (use the existing EnterWebsiteGate interaction) to satisfy browser autoplay restrictions.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "And add a background music \"Soch_Na_Sake..."
+        ]
+      },
+      "acceptanceCriteria": [
+        "After the user completes the EnterWebsiteGate interaction, the background music starts and loops.",
+        "Navigating between routes ('/', '/proposal', '/final') does not stop or restart the audio (no audible interruption).",
+        "No audio controls are visible in the UI."
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Address the reported issue that a successful deploy showed no visible changes by ensuring the updated assets and styling are actually the ones referenced at runtime (e.g., update static asset paths used by the pages so they point to the replaced/generated files, and remove any stale references).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "But nothing changed",
+          "everything looks untouched"
+        ]
+      },
+      "acceptanceCriteria": [
+        "After rebuild, Page 1 background, Page 1 CTA color, Page 1 title/paragraph sizing/placement, and Page 2 heading color all reflect the requested changes in the live preview.",
+        "No page continues to reference the old Page 1 background path once the replacement is applied."
       ]
     }
   ],
   "constraints": [
-    "Do not edit files under frontend/src/components/ui (read-only components must be composed, not modified).",
-    "Do not modify immutable hook/bootstrap files listed in SYSTEM_CONTEXT (e.g., frontend/src/main.tsx, frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts).",
-    "Keep the existing full-screen background rendering rules: background-size contain (letterbox), centered, no-repeat, with a black translucent overlay.",
-    "Backend remains single-actor Motoko; do not introduce additional backend services or external databases.",
-    "Use English for any user-facing text changed/added as part of these updates."
+    "Do not edit any files under frontend/src/components/ui (read-only).",
+    "Do not edit immutable paths: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx.",
+    "Keep the backend as-is (backend/main.mo remains a single empty actor unless a new backend requirement is explicitly needed).",
+    "All user-facing text in the app must remain in English only where new user-facing text is introduced by these changes."
   ],
   "nonGoals": [
-    "Re-enabling or adding background music/audio playback.",
-    "Changing routing structure beyond what is required for the styling updates.",
-    "Changing or regenerating the three background images beyond the already-established asset replacement/mapping behavior."
+    "Adding new pages or changing the existing 3-route structure.",
+    "Changing the letterbox/contain background behavior or removing the black overlay.",
+    "Adding third-party audio streaming or external integrations; audio must be a bundled static asset."
   ],
   "imageRequirements": {
-    "required": [],
+    "required": [
+      "Page 1 full-screen background image (bg-page-1.dim_1920x1080.png)"
+    ],
     "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
   }
 }

@@ -1,62 +1,136 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Love-themed gate restyle, Final page readability fixes, and smaller YES button",
+  "title": "Apply Page 1/2 styling updates, swap Page 1 background, and restore continuous background music",
   "requirements": [
     {
-      "id": "REQ-19",
-      "summary": "Make the Final page message and signature solid pure white, remove shimmer animation, and preserve existing fonts and scroll/line-break behavior.",
+      "id": "REQ-1",
+      "summary": "Adjust IntroPage title size/vertical placement and increase paragraph font size while keeping wine/unicorn-silver colors.",
       "acceptanceCriteria": [
-        "On /final, the long message is rendered in solid white (no shimmer/metallic/shine animation).",
-        "On /final, the signature “- YOUR ARSU” is rendered in solid white and retains its existing font family styling.",
-        "Page 3 remains vertically scrollable and preserves existing line breaks (whitespace-pre-wrap behavior remains intact)."
+        "On Page 1, the title is visibly larger than before and sits slightly lower than its previous position, without shifting left/right.",
+        "On Page 1, the paragraph font size is increased compared to the current deployed version.",
+        "Page 1 title uses the wine color token and the paragraph uses the unicorn silver color token."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/FinalPage.tsx",
+          "path": "frontend/src/pages/IntroPage.tsx",
           "operation": "modify",
-          "description": "Remove the shimmer/shine styling from the long message (drop animate-shimmer) and render both the message and signature in solid pure white while keeping the existing font classes and whitespace-pre-wrap/scroll container behavior intact."
+          "description": "Update Page 1 (IntroPage) Tailwind classes to increase the title font size and move the title slightly downward while keeping the same horizontal alignment; increase paragraph font sizing while keeping title color as text-wine and paragraph color as text-unicorn-silver."
         }
       ]
     },
     {
-      "id": "REQ-20",
-      "summary": "Reduce the YES button size on the Proposal page without changing its romantic styling or navigation behavior.",
+      "id": "REQ-2",
+      "summary": "Swap Page 1 background to the generated asset served from frontend static assets while preserving existing letterbox/overlay behavior.",
       "acceptanceCriteria": [
-        "On /proposal, the YES button is visibly smaller than before (reduced padding and/or font size), while retaining the same styling and hover/transition behavior.",
-        "Clicking YES still navigates to /final."
+        "Page 1 displays the new background image instead of the current one.",
+        "Background rendering rules remain unchanged: centered, no-repeat, contain/letterbox, with the black translucent overlay above the image and behind content."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/RomanticButton.tsx",
+          "path": "frontend/public/assets/generated/bg-page-1.dim_1920x1080.png",
+          "operation": "create",
+          "description": "Add the generated Page 1 background image asset at frontend/public/assets/generated/bg-page-1.dim_1920x1080.png so it can be served as a static asset."
+        },
+        {
+          "path": "frontend/src/assets/staticAssets.ts",
           "operation": "modify",
-          "description": "Add support for a smaller size option (e.g., via an optional prop or className override) that only adjusts sizing tokens (padding/font-size) while keeping the same colors, rounded shape, backdrop-blur, and hover/transition behavior."
+          "description": "Update the Page 1 background reference to point to the generated static asset path for Page 1 (use the frontend public asset path for frontend/public/assets/generated/bg-page-1.dim_1920x1080.png)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Update the Page 1 navigation CTA styling to use the Kaitoke color.",
+      "acceptanceCriteria": [
+        "The Page 1 CTA that navigates to '/proposal' renders with a Kaitoke-colored background (or primary accent) in its default state.",
+        "The CTA remains clearly readable against its background after the color change."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/IntroPage.tsx",
+          "operation": "modify",
+          "description": "Change the CTA container (the clickable control that navigates to '/proposal') to use a Kaitoke-colored background (e.g., Tailwind bg-kaitoke with suitable opacity) and adjust text color if needed to maintain readability."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Set the Page 2 proposal question heading color to Barbie Pink.",
+      "acceptanceCriteria": [
+        "On Page 2, the 'Will you marry me ?' heading renders in Barbie Pink."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add a global CSS color token/variable for Barbie Pink (e.g., --barbie-pink) alongside the existing romantic palette variables so Tailwind can reference it."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend Tailwind theme colors to include a barbie-pink color mapped to the new CSS variable so it can be used as a utility class."
         },
         {
           "path": "frontend/src/pages/ProposalPage.tsx",
           "operation": "modify",
-          "description": "Use the updated RomanticButton sizing API (or pass an override) so the YES button renders slightly smaller on /proposal while preserving the existing click handler that navigates to /final."
+          "description": "Update the Page 2 proposal heading ('Will you marry me ?') to use the Barbie Pink text color utility (e.g., text-barbie-pink) instead of the current color."
         }
       ]
     },
     {
-      "id": "REQ-21",
-      "summary": "Restyle the Enter Website gate with a Valentine/love theme and visible animated hearts on desktop and mobile while keeping the same enter-to-dismiss behavior.",
+      "id": "REQ-5",
+      "summary": "Implement continuous, looping, hidden background music that starts after EnterWebsiteGate interaction and persists across route navigation.",
       "acceptanceCriteria": [
-        "Before entering the site, the gate screen shows a love-themed visual style (romantic/love colors) rather than a plain black/white appearance.",
-        "The gate screen includes heart-themed animation(s) visible on both desktop and mobile.",
-        "Clicking/tapping “Enter the Website” still dismisses the gate and reveals the existing 3-page flow unchanged."
+        "After the user completes the EnterWebsiteGate interaction, the background music starts and loops.",
+        "Navigating between routes ('/', '/proposal', '/final') does not stop or restart the audio (no audible interruption).",
+        "No audio controls are visible in the UI."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/EnterWebsiteGate.tsx",
-          "operation": "modify",
-          "description": "Update the gate screen styling to a more Valentine/love-themed look (romantic gradients/overlays) and render decorative heart elements behind/around the content; keep the current state-driven gate behavior and Enter button click-to-dismiss unchanged."
+          "path": "frontend/public/assets/generated/Soch_Na_Sake.mp3",
+          "operation": "create",
+          "description": "Add the bundled background music track as a static asset at frontend/public/assets/generated/Soch_Na_Sake.mp3 (source from the provided \"Soch_Na_Sake_FULL_VIDEO_SONG_...128k.mp3\" asset) so it can be loaded without external integrations."
         },
         {
-          "path": "frontend/src/index.css",
+          "path": "frontend/src/components/BackgroundAudioProvider.tsx",
           "operation": "modify",
-          "description": "Add heart-themed animation keyframes and utility classes used by EnterWebsiteGate (e.g., floating/drifting hearts, gentle pulsing), ensuring the hearts are visible on both desktop and mobile and do not affect the existing full-screen background rendering rules elsewhere."
+          "description": "Implement a BackgroundAudioProvider that owns a single long-lived HTMLAudioElement instance (hidden, no controls), supports starting playback after user interaction, and loops continuously without restarting on route changes."
+        },
+        {
+          "path": "frontend/src/components/RootLayout.tsx",
+          "operation": "modify",
+          "description": "Wire BackgroundAudioProvider above the router Outlet so the audio instance remains mounted and uninterrupted across navigation between '/', '/proposal', and '/final'."
+        },
+        {
+          "path": "frontend/src/components/EnterWebsiteGate.tsx",
+          "operation": "modify",
+          "description": "Extend EnterWebsiteGate to notify the app when the user completes the interaction (e.g., add an optional callback prop invoked on successful entry) so background music can start only after user interaction to satisfy autoplay restrictions."
+        },
+        {
+          "path": "frontend/src/pages/IntroPage.tsx",
+          "operation": "modify",
+          "description": "Connect the EnterWebsiteGate completion interaction to BackgroundAudioProvider start playback (e.g., pass a callback into EnterWebsiteGate that triggers the provider’s start method) so audio begins only after entry and continues across subsequent navigation."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Ensure runtime references use the updated assets/styles so the deployed build reflects changes and no stale background paths remain.",
+      "acceptanceCriteria": [
+        "After rebuild, Page 1 background, Page 1 CTA color, Page 1 title/paragraph sizing/placement, and Page 2 heading color all reflect the requested changes in the live preview.",
+        "No page continues to reference the old Page 1 background path once the replacement is applied."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/assets/staticAssets.ts",
+          "operation": "modify",
+          "description": "Remove stale references to the old Page 1 background image path by ensuring staticAssets.bgPage1 points to the generated asset (and, to avoid similar cache/staleness issues, align bgPage2/bgPage3 to the generated asset paths if they exist in frontend/public/assets/generated/)."
+        },
+        {
+          "path": "frontend/public/assets/InsMix_20260209_211147926.jpg",
+          "operation": "delete",
+          "description": "If present in the repo, remove the old Page 1 background asset to prevent accidental runtime references and ensure the build uses the generated replacement."
         }
       ]
     }

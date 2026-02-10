@@ -2,11 +2,9 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-update-page-3-final-page-so-the-long-message-text-and-the-signature-are-pure-white-and-easy-to-read-remove-the-shimmer-shine-animation-from-the-message-keep-the-existing-fonts-and-ensure-the-signature-uses-the-same-font-as-before-but-is-also-pure-white",
-      "featureTitle": "Update Page 3 (Final page) so the long message text and the signature are pure white and easy to read: remove the shimmer/shine animation from the message, keep the existing fonts, and ensure the signature uses the same font as before but is also pure white.",
-      "files": [
-        "frontend/src/pages/FinalPage.tsx"
-      ],
+      "featureId": "feature-replace-the-page-1-background-image-with-the-newly-uploaded-image-by-updating-the-app-to-reference-the-generated-background-asset-for-page-1-and-ensure-the-image-is-served-from-the-frontend-static-assets-path",
+      "featureTitle": "Replace the Page 1 background image with the newly uploaded image by updating the app to reference the generated background asset for Page 1 (and ensure the image is served from the frontend static assets path).",
+      "files": [],
       "components": [
         "core-infrastructure@1.0.2",
         "shadcn-ui@1.0.0",
@@ -15,45 +13,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-19"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-make-the-page-2-yes-button-slightly-smaller-while-keeping-the-existing-romantic-styling-same-colors-rounded-shape-hover-behavior-and-general-look",
-      "featureTitle": "Make the Page 2 “YES” button slightly smaller while keeping the existing romantic styling (same colors, rounded shape, hover behavior, and general look).",
-      "files": [
-        "frontend/src/components/RomanticButton.tsx",
-        "frontend/src/pages/ProposalPage.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-20"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-restyle-the-pre-page-1-enter-the-website-gate-screen-to-feel-more-love-valentine-themed-using-love-colors-and-animated-hearts-while-keeping-the-same-gate-behavior-user-must-click-tap-to-enter-the-site",
-      "featureTitle": "Restyle the pre-Page-1 “Enter the Website” gate screen to feel more love/Valentine-themed using love colors and animated hearts, while keeping the same gate behavior (user must click/tap to enter the site).",
-      "files": [
-        "frontend/src/components/EnterWebsiteGate.tsx",
-        "frontend/src/index.css"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-21"
+        "REQ-2"
       ],
       "confidence": "high"
     }

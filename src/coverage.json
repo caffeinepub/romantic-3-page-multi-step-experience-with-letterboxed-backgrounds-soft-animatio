@@ -1,65 +1,86 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-09T20:13:27.833Z",
+  "generatedAt": "2026-02-10T02:35:24.194Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 3,
-    "implemented": 3,
+    "total": 6,
+    "implemented": 1,
     "items": [
       {
-        "id": "REQ-19",
-        "summary": "Update Page 3 (Final page) so the long message text and the signature are pure white and easy to read: remove the shimmer/shine animation from the message, keep the existing fonts, and ensure the signature uses the same font as before but is also pure white.",
+        "id": "REQ-1",
+        "summary": "Update Page 1 (IntroPage) typography and placement: keep the title in the same horizontal position, make the title larger, and move it slightly downward; also increase the paragraph font size. Keep Page 1 title color as wine and paragraph color as unicorn silver.",
+        "status": "missing",
+        "plannedFiles": [
+          "frontend/src/pages/IntroPage.tsx"
+        ],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Replace the Page 1 background image with the newly uploaded image by updating the app to reference the generated background asset for Page 1 (and ensure the image is served from the frontend static assets path).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/FinalPage.tsx"
+          "frontend/public/assets/generated/bg-page-1.dim_1920x1080.png",
+          "frontend/src/assets/staticAssets.ts"
         ],
         "matchedFiles": [
-          "frontend/src/pages/FinalPage.tsx"
+          "frontend/public/assets/generated/bg-page-1.dim_1920x1080.png"
         ]
       },
       {
-        "id": "REQ-20",
-        "summary": "Make the Page 2 “YES” button slightly smaller while keeping the existing romantic styling (same colors, rounded shape, hover behavior, and general look).",
-        "status": "implemented",
+        "id": "REQ-3",
+        "summary": "Change the Page 1 navigation CTA (the control that takes the user from Page 1 to Page 2) to use the Kaitoke color.",
+        "status": "missing",
         "plannedFiles": [
-          "frontend/src/components/RomanticButton.tsx",
-          "frontend/src/pages/ProposalPage.tsx"
+          "frontend/src/pages/IntroPage.tsx"
         ],
-        "matchedFiles": [
-          "frontend/src/components/RomanticButton.tsx",
-          "frontend/src/pages/ProposalPage.tsx"
-        ]
+        "matchedFiles": []
       },
       {
-        "id": "REQ-21",
-        "summary": "Restyle the pre-Page-1 “Enter the Website” gate screen to feel more love/Valentine-themed using love colors and animated hearts, while keeping the same gate behavior (user must click/tap to enter the site).",
-        "status": "implemented",
+        "id": "REQ-4",
+        "summary": "Set the Page 2 proposal question line color to Barbie Pink.",
+        "status": "missing",
         "plannedFiles": [
-          "frontend/src/components/EnterWebsiteGate.tsx",
-          "frontend/src/index.css"
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js",
+          "frontend/src/pages/ProposalPage.tsx"
         ],
-        "matchedFiles": [
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-5",
+        "summary": "Add background music playback for a track named \"Soch_Na_Sake...\" that loops continuously, has no visible controls, and continues playing uninterrupted across navigation from Page 1 → Page 2 → Page 3. Ensure playback starts only after a user interaction (use the existing EnterWebsiteGate interaction) to satisfy browser autoplay restrictions.",
+        "status": "missing",
+        "plannedFiles": [
+          "frontend/public/assets/generated/Soch_Na_Sake.mp3",
+          "frontend/src/components/BackgroundAudioProvider.tsx",
+          "frontend/src/components/RootLayout.tsx",
           "frontend/src/components/EnterWebsiteGate.tsx",
-          "frontend/src/index.css"
-        ]
+          "frontend/src/pages/IntroPage.tsx"
+        ],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-6",
+        "summary": "Address the reported issue that a successful deploy showed no visible changes by ensuring the updated assets and styling are actually the ones referenced at runtime (e.g., update static asset paths used by the pages so they point to the replaced/generated files, and remove any stale references).",
+        "status": "missing",
+        "plannedFiles": [
+          "frontend/src/assets/staticAssets.ts",
+          "frontend/public/assets/InsMix_20260209_211147926.jpg"
+        ],
+        "matchedFiles": []
       }
     ]
   },
   "changedFiles": [
     "build-request.json",
     "feature_evidence.json",
-    "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/assets/staticAssets.ts",
-    "frontend/src/components/EnterWebsiteGate.tsx",
-    "frontend/src/components/RomanticButton.tsx",
-    "frontend/src/index.css",
-    "frontend/src/pages/FinalPage.tsx",
-    "frontend/src/pages/ProposalPage.tsx",
+    "frontend/public/assets/generated/bg-page-1.dim_1920x1080.png",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

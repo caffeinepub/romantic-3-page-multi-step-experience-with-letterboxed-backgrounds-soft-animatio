@@ -1,11 +1,14 @@
 # Specification
 
 ## Summary
-**Goal:** Improve readability on the Final page, slightly reduce the YES button size, and restyle the intro gate screen with a love/Valentine theme while keeping existing navigation and behavior.
+**Goal:** Apply the confirmed styling updates to Page 1 and Page 2, swap Page 1’s background image, and re-enable looping background music that persists across all three routes.
 
 **Planned changes:**
-- Update the /final page long message and signature to render as solid pure white; remove the shimmer/shine effect from the message while preserving the existing fonts and line breaks.
-- Make the /proposal “YES” button slightly smaller (padding and/or font size) while keeping the same romantic styling and hover/transition behavior; keep YES navigation to /final unchanged.
-- Restyle the pre-Page-1 “Enter the Website” gate screen with romantic/love colors and visible animated heart effects on desktop and mobile, without changing the click/tap-to-enter behavior or the existing 3-page flow.
+- Update Page 1 (IntroPage) title typography and placement: keep its horizontal position, make it larger, and move it slightly downward; increase the paragraph font size; keep title color as wine and paragraph color as unicorn silver.
+- Replace the Page 1 background image to use the provided generated asset and ensure it is referenced via the correct frontend static asset path while keeping existing background rendering rules (centered, no-repeat, contain/letterbox, black translucent overlay).
+- Change the Page 1 navigation CTA (to “/proposal”) styling to use the Kaitoke color while maintaining readable contrast.
+- Update Page 2 proposal question (“Will you marry me ?”) line color to Barbie Pink.
+- Add bundled background music (“Soch_Na_Sake...”) that starts only after the EnterWebsiteGate interaction, loops continuously, has no visible controls, and continues uninterrupted across navigation between “/”, “/proposal”, and “/final”.
+- Ensure updated assets and styles are the ones actually referenced at runtime so the live build reflects the requested changes (remove/replace stale asset references).
 
-**User-visible outcome:** The Final page text is clearly readable in pure white, the YES button looks slightly smaller but behaves the same, and the entry gate feels Valentine-themed with animated hearts while still requiring a tap/click to enter.
+**User-visible outcome:** Page 1 shows the new background and updated title/paragraph styling with a Kaitoke-colored CTA to Page 2; Page 2 shows the proposal heading in Barbie Pink; after the entry interaction, background music plays and loops continuously without controls and without stopping when moving through Page 1 → Page 2 → Page 3.
