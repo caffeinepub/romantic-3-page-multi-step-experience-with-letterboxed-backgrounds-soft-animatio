@@ -1,51 +1,33 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "Music player site: set a specific uploaded track as the default, auto-play it on site load, and move the song selection bar to the top while keeping uploads enabled.",
+  "summary": "New project",
   "architectural_notes": [],
-  "known_issues": [],
-  "isFixRequest": false,
+  "known_issues": [
+    "App shows “default music not available” because it attempts to load /assets/background-music.mp3 which is missing; needs wiring uploaded song as default asset."
+  ],
+  "isFixRequest": true,
   "existing_features": [
     {
-      "id": "feature-set-the-site-s-default-background-music-to-the-uploaded-song-whose-filename-starts-with-soch-na-sake-by-making-that-track-the-runtime-default-audio-asset-at-frontend-public-assets-background-music-mp3-replace-update-the-existing-default-music-file-as-needed-while-keeping-the-local-file-picker-feature-available",
-      "title": "Set the site’s default background music to the uploaded song whose filename starts with \"Soch Na Sake\" by making that track the runtime default audio asset at `frontend/public/assets/background-music.mp3` (replace/update the existing default music file as needed) while keeping the local file picker feature available.",
+      "id": "feature-add-the-default-background-music-file-at-frontend-public-assets-background-music-mp3-so-the-app-no-longer-shows-the-error-message-about-default-music-being-unavailable",
+      "title": "Add the default background music file at `frontend/public/assets/background-music.mp3` so the app no longer shows the error message about default music being unavailable.",
       "reqIds": [
         "REQ-1"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-move-the-song-selection-control-the-fixed-position-song-picker-bar-button-from-the-bottom-of-the-page-to-the-upper-side-top-of-the-page-without-covering-the-existing-top-right-play-mute-controls",
-      "title": "Move the song selection control (the fixed-position song picker bar/button) from the bottom of the page to the upper side (top) of the page, without covering the existing top-right play/mute controls.",
-      "reqIds": [
-        "REQ-3"
       ],
       "version": 1
     }
   ],
   "new_feature_requests": [
     {
-      "id": "AR-1",
-      "summary": "Set uploaded track starting with \"Soch Na Sake\" as the default song in the site music player and auto-play it immediately on site load while keeping the upload feature unchanged.",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
       "id": "AR-2",
-      "summary": "Move the song selection bar from the bottom of the page to the upper side (top).",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-4",
-      "summary": "Ensure the default track attempts to auto-play immediately when the user opens the site, with the existing graceful fallback behavior (play-on-gesture via the Enter gate, and a visible manual \"Play Music\" button if needed) preserved.",
+      "summary": "Ensure `BackgroundAudioProvider` continues to use `/assets/background-music.mp3` as the default source and that the existing playback behavior remains intact (autoplay attempt on load, play-on-user-gesture via the entry gate, and manual \"Play Music\" fallback button if needed).",
       "reqIds": [
         "REQ-2"
       ],
       "status": "pending"
     }
   ],
-  "projectName": "Set 'Soch Na Sake…' as default autoplay track and move song picker to top",
+  "projectName": "Fix missing default background music asset and restore autoplay fallback behavior",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

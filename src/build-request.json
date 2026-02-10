@@ -1,87 +1,64 @@
 {
   "kind": "build_request",
-  "title": "Set 'Soch Na Sake…' as default autoplay track and move song picker to top",
+  "title": "Fix missing default background music asset and restore autoplay fallback behavior",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Set the site’s default background music to the uploaded song whose filename starts with \"Soch Na Sake\" by making that track the runtime default audio asset at `frontend/public/assets/background-music.mp3` (replace/update the existing default music file as needed) while keeping the local file picker feature available.",
+      "text": "Add the default background music file at `frontend/public/assets/background-music.mp3` so the app no longer shows the error message about default music being unavailable.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-6"
+          "msg-5",
+          "msg-6",
+          "msg-8"
         ],
         "quotes": [
-          "Build it and add the song as default \nSong file name starts from \"Soch Na sake....\""
+          "Why it says default music not available",
+          "Fix it",
+          "Build it"
         ]
       },
       "acceptanceCriteria": [
-        "On a fresh load (no prior interaction), the app’s default audio source is `'/assets/background-music.mp3'` and it corresponds to the uploaded track starting with \"Soch Na Sake\".",
-        "The app still allows users to choose a local audio file and switches playback to the chosen file as it does today.",
-        "If the default asset cannot be loaded, the UI shows an English status message indicating the default audio is unavailable and instructs the user to choose a song file."
+        "`frontend/public/assets/background-music.mp3` exists in the built frontend output and is fetchable at runtime via `/assets/background-music.mp3`.",
+        "On a fresh load, the UI does not display the status message \"Default audio unavailable. Please choose a song file to play.\" when the default asset is present.",
+        "No console error event is emitted from the `<audio>` element due to missing `/assets/background-music.mp3`."
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Ensure the default track attempts to auto-play immediately when the user opens the site, with the existing graceful fallback behavior (play-on-gesture via the Enter gate, and a visible manual \"Play Music\" button if needed) preserved.",
+      "text": "Ensure `BackgroundAudioProvider` continues to use `/assets/background-music.mp3` as the default source and that the existing playback behavior remains intact (autoplay attempt on load, play-on-user-gesture via the entry gate, and manual \"Play Music\" fallback button if needed).",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4",
-          "msg-6"
+          "msg-6",
+          "msg-8"
         ],
         "quotes": [
-          "2. Auto play immediately when user open the site",
-          "Build it and add the song as default \nSong file name starts from \"Soch Na sake....\""
+          "Fix it",
+          "Build it"
         ]
       },
       "acceptanceCriteria": [
-        "When the site loads, an autoplay attempt is made without requiring navigation or additional clicks.",
-        "If the browser blocks autoplay, clicking \"Enter the Website\" triggers a playback attempt.",
-        "If autoplay and gesture-based playback both fail, a \"Play Music\" button appears and starts playback when clicked."
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "text": "Move the song selection control (the fixed-position song picker bar/button) from the bottom of the page to the upper side (top) of the page, without covering the existing top-right play/mute controls.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-5"
-        ],
-        "quotes": [
-          "And one more thing place this song selection baar in upper side not in bottom"
-        ]
-      },
-      "acceptanceCriteria": [
-        "The song picker UI is positioned at the top of the viewport (not bottom) across all routes.",
-        "The song picker does not overlap the top-right play/mute UI controls at common viewport sizes (mobile and desktop).",
-        "All user-facing labels in the song picker remain in English (e.g., \"Choose Song\", status messages)."
+        "On page load, the app attempts to autoplay the default track (a blocked autoplay is handled without crashing).",
+        "If autoplay is blocked, clicking the app’s entry/gesture control triggers playback (where browser policy permits).",
+        "If playback still fails after a gesture attempt, a visible \"Play Music\" button appears and attempts to start playback when clicked.",
+        "The local file picker remains available and can override the default track by selecting a local audio file."
       ]
     }
   ],
   "constraints": [
-    "Do not edit files under `frontend/src/components/ui` (compose them instead).",
-    "Do not modify immutable hook/bootstrap files: `frontend/src/hooks/useInternetIdentity.ts`, `frontend/src/hooks/useInternetIdentity.tsx`, `frontend/src/hooks/useActor.ts`, `frontend/src/main.tsx`.",
-    "Keep the backend as a single Motoko actor; no backend changes are required for this request."
+    "Do not modify files under `frontend/src/components/ui` (read-only UI sources).",
+    "Do not modify `frontend/src/hooks/useInternetIdentity.ts`, `frontend/src/hooks/useInternetIdentity.tsx`, `frontend/src/hooks/useActor.ts`, or `frontend/src/main.tsx` (immutable paths).",
+    "Keep all user-facing text in English."
   ],
   "nonGoals": [
-    "Add a backend upload endpoint or persist user audio files on-chain.",
-    "Add third-party audio streaming integrations or external storage.",
-    "Implement playlists, multiple saved tracks, or account-based music preferences."
+    "Adding new backend canister logic (the backend is currently unused for audio).",
+    "Adding third-party audio streaming or external storage.",
+    "Changing the existing page flow/routes (/, /proposal, /final) beyond what is required to fix default music availability."
   ],
   "imageRequirements": {
     "required": [],
     "edits": []
-  },
-  "userProfileUpdate": {
-    "goalsToAdd": [],
-    "goalsToRemove": [],
-    "preferencesToAdd": [],
-    "preferencesToRemove": [],
-    "miscToAdd": [],
-    "miscToRemove": [],
-    "fieldsToSet": {},
-    "fieldsToDelete": []
   }
 }

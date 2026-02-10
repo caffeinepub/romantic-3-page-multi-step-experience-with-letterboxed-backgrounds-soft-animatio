@@ -1,73 +1,43 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Default 'Soch Na Sake…' background music, preserve autoplay fallbacks, and move song picker to top",
+  "title": "Restore default background music asset and maintain autoplay/gesture fallback behavior",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Replace the runtime default background music asset with the uploaded track whose filename starts with \"Soch Na Sake\", while keeping local file picking and showing an English fallback message if the default asset fails to load.",
+      "summary": "Add the missing default background music asset so the app can load it without showing an unavailable message.",
       "acceptanceCriteria": [
-        "On a fresh load (no prior interaction), the app’s default audio source is `'/assets/background-music.mp3'` and it corresponds to the uploaded track starting with \"Soch Na Sake\".",
-        "The app still allows users to choose a local audio file and switches playback to the chosen file as it does today.",
-        "If the default asset cannot be loaded, the UI shows an English status message indicating the default audio is unavailable and instructs the user to choose a song file."
+        "`frontend/public/assets/background-music.mp3` exists in the built frontend output and is fetchable at runtime via `/assets/background-music.mp3`.",
+        "On a fresh load, the UI does not display the status message \"Default audio unavailable. Please choose a song file to play.\" when the default asset is present.",
+        "No console error event is emitted from the `<audio>` element due to missing `/assets/background-music.mp3`."
       ],
       "file_operations": [
         {
           "path": "frontend/public/assets/background-music.mp3",
-          "operation": "modify",
-          "description": "Replace/overwrite this file so it contains the uploaded \"Soch Na Sake\" track (e.g., sourced from the uploaded asset file `frontend/public/assets/Soch Na Sake FULL VIDEO SONG  AIRLIFT  Akshay Kumar, Nimrat Kaur  Arijit Singh, Tulsi Kumar - T-Series.mp3`), keeping the public path unchanged for runtime default playback."
+          "operation": "create",
+          "description": "Add the default background music file to the public assets directory so it is served at runtime from `/assets/background-music.mp3`."
         },
         {
-          "path": "frontend/src/components/BackgroundAudioProvider.tsx",
+          "path": "frontend/README-assets.md",
           "operation": "modify",
-          "description": "Ensure the default audio source remains `'/assets/background-music.mp3'` and that load failures set an English status message instructing the user to choose a local song file (preserving the existing local-file switching behavior)."
-        },
-        {
-          "path": "frontend/src/components/CornerAudioPicker.tsx",
-          "operation": "modify",
-          "description": "Confirm the status message from the audio provider is always displayed in English when present and that the local file picker continues to accept and switch playback to a user-selected local audio file."
+          "description": "Confirm the documentation references `frontend/public/assets/background-music.mp3` as the single source-of-truth and aligns diagnostics guidance with the restored default asset."
         }
       ]
     },
     {
       "id": "REQ-2",
-      "summary": "Attempt autoplay immediately on site open and preserve graceful fallbacks via the Enter gate and a manual \"Play Music\" button if needed.",
+      "summary": "Keep BackgroundAudioProvider using `/assets/background-music.mp3` by default and preserve autoplay, user-gesture playback via the entry gate, and the manual Play Music fallback (plus local file override).",
       "acceptanceCriteria": [
-        "When the site loads, an autoplay attempt is made without requiring navigation or additional clicks.",
-        "If the browser blocks autoplay, clicking \"Enter the Website\" triggers a playback attempt.",
-        "If autoplay and gesture-based playback both fail, a \"Play Music\" button appears and starts playback when clicked."
+        "On page load, the app attempts to autoplay the default track (a blocked autoplay is handled without crashing).",
+        "If autoplay is blocked, clicking the app’s entry/gesture control triggers playback (where browser policy permits).",
+        "If playback still fails after a gesture attempt, a visible \"Play Music\" button appears and attempts to start playback when clicked.",
+        "The local file picker remains available and can override the default track by selecting a local audio file."
       ],
       "file_operations": [
         {
           "path": "frontend/src/components/BackgroundAudioProvider.tsx",
           "operation": "modify",
-          "description": "Verify and (if needed) refine the initial autoplay attempt on provider mount, ensure the Enter-gate gesture path triggers another playback attempt, and ensure the manual \"Play Music\" button reliably appears only when automatic and gesture-based playback attempts have not succeeded."
-        },
-        {
-          "path": "frontend/src/components/EnterWebsiteGate.tsx",
-          "operation": "modify",
-          "description": "Ensure clicking \"Enter the Website\" continues to trigger a non-blocking playback attempt via the provider’s gesture-based play function, preserving the existing flow to reveal the site content immediately."
-        }
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "summary": "Move the fixed-position song picker from the bottom to the top of the viewport without overlapping the top-right play/mute controls, keeping all labels in English.",
-      "acceptanceCriteria": [
-        "The song picker UI is positioned at the top of the viewport (not bottom) across all routes.",
-        "The song picker does not overlap the top-right play/mute UI controls at common viewport sizes (mobile and desktop).",
-        "All user-facing labels in the song picker remain in English (e.g., \"Choose Song\", status messages)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/CornerAudioPicker.tsx",
-          "operation": "modify",
-          "description": "Update the fixed positioning from bottom-left to top-left (or another top placement) and adjust spacing/layout so it does not overlap the provider’s top-right play/mute controls on mobile and desktop, while keeping all song-picker labels/messages in English."
-        },
-        {
-          "path": "frontend/src/components/BackgroundAudioProvider.tsx",
-          "operation": "modify",
-          "description": "Confirm the top-right play/mute control positioning remains unchanged and visually non-overlapping with the moved song picker across routes."
+          "description": "Ensure the default audio source remains `/assets/background-music.mp3`, preserve the existing autoplay attempt on mount, keep gesture-based playback via `playFromGesture`, and maintain the manual \"Play Music\" fallback visibility logic (only after a gesture attempt and playback failure). Also keep local file selection overriding the default source and clearing any default-unavailable status when a playable source loads."
         }
       ]
     }

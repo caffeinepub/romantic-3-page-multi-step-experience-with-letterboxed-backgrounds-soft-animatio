@@ -1,50 +1,35 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-10T14:14:20.157Z",
+  "generatedAt": "2026-02-10T14:25:59.185Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 3,
-    "implemented": 2,
+    "total": 2,
+    "implemented": 1,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Set the site’s default background music to the uploaded song whose filename starts with \"Soch Na Sake\" by making that track the runtime default audio asset at `frontend/public/assets/background-music.mp3` (replace/update the existing default music file as needed) while keeping the local file picker feature available.",
+        "summary": "Add the default background music file at `frontend/public/assets/background-music.mp3` so the app no longer shows the error message about default music being unavailable.",
         "status": "implemented",
         "plannedFiles": [
           "frontend/public/assets/background-music.mp3",
-          "frontend/src/components/BackgroundAudioProvider.tsx",
-          "frontend/src/components/CornerAudioPicker.tsx"
+          "frontend/README-assets.md"
         ],
         "matchedFiles": [
-          "frontend/public/assets/background-music.mp3",
-          "frontend/src/components/CornerAudioPicker.tsx"
+          "frontend/public/assets/background-music.mp3"
         ]
       },
       {
         "id": "REQ-2",
-        "summary": "Ensure the default track attempts to auto-play immediately when the user opens the site, with the existing graceful fallback behavior (play-on-gesture via the Enter gate, and a visible manual \"Play Music\" button if needed) preserved.",
+        "summary": "Ensure `BackgroundAudioProvider` continues to use `/assets/background-music.mp3` as the default source and that the existing playback behavior remains intact (autoplay attempt on load, play-on-user-gesture via the entry gate, and manual \"Play Music\" fallback button if needed).",
         "status": "missing",
         "plannedFiles": [
-          "frontend/src/components/BackgroundAudioProvider.tsx",
-          "frontend/src/components/EnterWebsiteGate.tsx"
-        ],
-        "matchedFiles": []
-      },
-      {
-        "id": "REQ-3",
-        "summary": "Move the song selection control (the fixed-position song picker bar/button) from the bottom of the page to the upper side (top) of the page, without covering the existing top-right play/mute controls.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/CornerAudioPicker.tsx",
           "frontend/src/components/BackgroundAudioProvider.tsx"
         ],
-        "matchedFiles": [
-          "frontend/src/components/CornerAudioPicker.tsx"
-        ]
+        "matchedFiles": []
       }
     ]
   },
@@ -54,7 +39,6 @@
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
     "frontend/public/assets/background-music.mp3",
-    "frontend/src/components/CornerAudioPicker.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

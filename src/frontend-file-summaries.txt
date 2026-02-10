@@ -16,6 +16,6 @@
   "frontend/cleanup-report.md": "Comprehensive cleanup report listing all 22 deleted files with justifications, the 3 kept background images, and verification steps to confirm the 3-page flow still works correctly.",
   "frontend/cleanup-notes-non-frontend.md": "Audit notes for repository-root feature_evidence.json file, documenting that it's not used by frontend but recommending backend/DevOps verification before deletion.",
   "frontend/index.html": "HTML entry point with updated title reflecting the romantic experience with background music.",
-  "frontend/public/assets/background-music.mp3": "Single compressed MP3 audio file for looping background music playback.",
+  "frontend/public/assets/background-music.mp3": "Default background music file containing the \"Soch Na Sake\" track (128k compressed MP3) that plays automatically on page load with user-gesture fallback handling.",
   "frontend/src/components/CornerAudioPicker.tsx": "Fixed-position corner UI control positioned at top-left that allows users to select local audio files from their device, displays the selected filename and status messages, and integrates with the background-audio context to switch playback sources without overlapping the top-right play/mute controls."
 }

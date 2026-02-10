@@ -2,11 +2,9 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-set-the-site-s-default-background-music-to-the-uploaded-song-whose-filename-starts-with-soch-na-sake-by-making-that-track-the-runtime-default-audio-asset-at-frontend-public-assets-background-music-mp3-replace-update-the-existing-default-music-file-as-needed-while-keeping-the-local-file-picker-feature-available",
-      "featureTitle": "Set the site’s default background music to the uploaded song whose filename starts with \"Soch Na Sake\" by making that track the runtime default audio asset at `frontend/public/assets/background-music.mp3` (replace/update the existing default music file as needed) while keeping the local file picker feature available.",
-      "files": [
-        "frontend/src/components/CornerAudioPicker.tsx"
-      ],
+      "featureId": "feature-add-the-default-background-music-file-at-frontend-public-assets-background-music-mp3-so-the-app-no-longer-shows-the-error-message-about-default-music-being-unavailable",
+      "featureTitle": "Add the default background music file at `frontend/public/assets/background-music.mp3` so the app no longer shows the error message about default music being unavailable.",
+      "files": [],
       "components": [
         "core-infrastructure@1.0.2",
         "shadcn-ui@1.0.0",
@@ -16,24 +14,6 @@
       ],
       "testIds": [
         "REQ-1"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-move-the-song-selection-control-the-fixed-position-song-picker-bar-button-from-the-bottom-of-the-page-to-the-upper-side-top-of-the-page-without-covering-the-existing-top-right-play-mute-controls",
-      "featureTitle": "Move the song selection control (the fixed-position song picker bar/button) from the bottom of the page to the upper side (top) of the page, without covering the existing top-right play/mute controls.",
-      "files": [
-        "frontend/src/components/CornerAudioPicker.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-3"
       ],
       "confidence": "high"
     }
